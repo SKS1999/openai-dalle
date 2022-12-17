@@ -12,7 +12,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
 
-        android:src="@android:drawable/ic_menu_gallery"
+        android:src="@drawable/ic_baseline_folder_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/editDesc"
         android:backgroundTint="@color/black"
@@ -108,36 +108,19 @@
                 <GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:columnCount="2">
+                    android:columnCount="1">
 
 
                     <View
                         android:layout_width="0dp"
-                        android:layout_height="200dp"
+                        android:layout_height="420dp"
                         android:layout_columnWeight="1"
                         android:layout_margin="@dimen/margin_small"
                         android:background="@drawable/radius_corner" />
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="200dp"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="@dimen/margin_small"
-                        android:background="@drawable/radius_corner" />
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="200dp"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="@dimen/margin_small"
-                        android:background="@drawable/radius_corner" />
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="200dp"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="@dimen/margin_small"
-                        android:background="@drawable/radius_corner" />
+
 
 
                 </GridLayout>
@@ -148,13 +131,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                android:columnCount="2"
+                android:columnCount="1"
                 android:visibility="gone">
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/generatedImageCard"
                     android:layout_width="0dp"
-                    android:layout_height="200dp"
+                    android:layout_height="420dp"
                     android:layout_columnWeight="1"
                     android:layout_margin="@dimen/margin_small"
                     android:clickable="true"
@@ -172,69 +155,9 @@
                         android:scaleType="centerCrop" />
                 </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/generatedImageCard2"
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="@dimen/margin_small"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="@dimen/card_elevation_small"
-                    app:strokeColor="@color/primary"
-                    app:strokeWidth="2dp">
-
-                    <ImageView
-                        android:id="@+id/generatedImageView2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop" />
-                </com.google.android.material.card.MaterialCardView>
 
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/generatedImageCard3"
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="@dimen/margin_small"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="@dimen/card_elevation_small"
-                    app:strokeColor="@color/primary"
-                    app:strokeWidth="2dp">
 
-                    <ImageView
-                        android:id="@+id/generatedImageView3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop" />
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/generatedImageCard4"
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="@dimen/margin_small"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="@dimen/card_elevation_small"
-                    app:strokeColor="@color/primary"
-                    app:strokeWidth="2dp">
-
-                    <ImageView
-                        android:id="@+id/generatedImageView4"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop" />
-                </com.google.android.material.card.MaterialCardView>
             </GridLayout>
 
         </LinearLayout>
