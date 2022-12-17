@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/generateImageFragment">
+
+    <fragment
+        android:id="@+id/generateImageFragment"
+        android:name="com.webomax.openai.presentation.generate_image.GenerateImageFragment"
+        android:label="fragment_generate_image"
+        tools:layout="@layout/fragment_generate_image" >
+        <action
+            android:id="@+id/action_generateImageFragment_to_imageDetailFragment"
+            app:destination="@id/imageDetailFragment" />
+        <action
+            android:id="@+id/action_generateImageFragment_to_recentFragment"
+            app:destination="@id/recentFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/imageDetailFragment"
+        android:name="com.webomax.openai.presentation.image_detail.ImageDetailFragment"
+        android:label="fragment_image_detail"
+        tools:layout="@layout/fragment_image_detail" >
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </dialog>
+    <fragment
+        android:id="@+id/recentFragment"
+        android:name="com.webomax.openai.RecentFragment"
+        android:label="fragment_recent"
+        tools:layout="@layout/fragment_recent" />
+</navigation>

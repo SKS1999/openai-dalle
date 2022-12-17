@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "746343893260",
+    "project_id": "openai-ecdd4",
+    "storage_bucket": "openai-ecdd4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746343893260:android:27689389a62034888b2129",
+        "android_client_info": {
+          "package_name": "com.webomax.openai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "746343893260-u8g28g6meqcipij9j5o2nuhdog6fju8l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXDqGaJuhmAX1YqOMm2Wp4dBXKRuUEaPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "746343893260-u8g28g6meqcipij9j5o2nuhdog6fju8l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
