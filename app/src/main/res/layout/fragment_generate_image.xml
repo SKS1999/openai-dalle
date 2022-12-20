@@ -11,11 +11,9 @@
         android:id="@+id/recent"
         android:layout_width="30dp"
         android:layout_height="30dp"
-
         android:src="@drawable/ic_baseline_folder_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/editDesc"
-        android:backgroundTint="@color/black"
         app:layout_constraintTop_toTopOf="parent" />
 
 

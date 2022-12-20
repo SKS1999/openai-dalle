@@ -17,14 +17,17 @@ import dagger.hilt.android.AndroidEntryPoint
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
 
+
 @AndroidEntryPoint
 class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
 
     private val viewModel: GenerateImageViewModel by viewModels()
+
     private val binding by viewBinding(FragmentGenerateImageBinding::bind)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewCollect()
+
     }
 
     private fun initViewCollect() {
@@ -39,10 +42,10 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
                     if (promptEditText.text.toString().isEmpty().not()) {
 
                         generateImage(promptEditText.text.toString(), 1, Sizes.SIZE_256)
+
                     } else {
                         promptInputLayout.error = getString(R.string.enter_prompt)
                     }
-
 
                 }
                 generatedImageCard.applyClickShrink()
@@ -111,6 +114,9 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
 
         }
     }
+
+
+
 
     private fun showImageFullPage(imageUrl: String) {
         findNavController().navigate(

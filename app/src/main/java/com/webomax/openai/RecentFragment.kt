@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.load.model.ModelLoader.LoadData
 
 class RecentFragment : Fragment() {
 
@@ -25,7 +26,8 @@ class RecentFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(RecentViewModel::class.java)
-        // TODO: Use the ViewModel
     }
+
+
 
 }
