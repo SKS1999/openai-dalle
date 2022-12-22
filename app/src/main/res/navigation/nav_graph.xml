@@ -13,9 +13,7 @@
         <action
             android:id="@+id/action_generateImageFragment_to_imageDetailFragment"
             app:destination="@id/imageDetailFragment" />
-        <action
-            android:id="@+id/action_generateImageFragment_to_recentFragment"
-            app:destination="@id/recentFragment" />
+
     </fragment>
     <dialog
         android:id="@+id/imageDetailFragment"
@@ -26,9 +24,5 @@
             android:name="url"
             app:argType="string" />
     </dialog>
-    <fragment
-        android:id="@+id/recentFragment"
-        android:name="com.webomax.openai.RecentFragment"
-        android:label="fragment_recent"
-        tools:layout="@layout/fragment_recent" />
+
 </navigation>

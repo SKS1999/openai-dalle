@@ -7,7 +7,9 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Environment
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.FirebaseDatabase
+import com.webomax.openai.R
 import java.io.File
 
 abstract class DownloadImage {
@@ -15,13 +17,17 @@ abstract class DownloadImage {
     private var msg: String? = ""
     private var lastMsg = ""
 
+
     val downloadImageState = MutableLiveData("")
 
 
     @SuppressLint("Range")
     fun downloadImageFromURL(url: String, context: Context) {
-        val directory = File(Environment.DIRECTORY_PICTURES)
+        val directory = File(Environment.DIRECTORY_DOWNLOADS)
 
+
+
+        // TODO: change up line code path to our desire path
         if (!directory.exists()) {
             directory.mkdirs()
         }

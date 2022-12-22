@@ -1,6 +1,7 @@
 package com.webomax.openai.presentation.generate_image
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.muratozturk.click_shrink_effect.applyClickShrink
 import com.webomax.openai.R
+import com.webomax.openai.RecentActivity
 import com.webomax.openai.common.*
 import com.webomax.openai.databinding.FragmentGenerateImageBinding
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
@@ -20,6 +22,7 @@ import www.sanju.motiontoast.MotionToastStyle
 
 @AndroidEntryPoint
 class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
+
 
     private val viewModel: GenerateImageViewModel by viewModels()
 
@@ -35,7 +38,9 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
             with(binding) {
 
                 recent.setOnClickListener{
-                    nextpage()
+                  val intent = Intent(this@GenerateImageFragment.requireContext(),RecentActivity::class.java)
+                    startActivity(intent)
+
                 }
                 generateButton.setOnClickListener {
 
@@ -125,9 +130,5 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
             )
         )
     }
-    private fun nextpage() {
-        findNavController().navigate(
-            GenerateImageFragmentDirections.actionGenerateImageFragmentToRecentFragment()
-        )
-    }
+
 }
