@@ -23,14 +23,19 @@ abstract class DownloadImage {
 
     @SuppressLint("Range")
     fun downloadImageFromURL(url: String, context: Context) {
-        val directory = File(Environment.DIRECTORY_DOWNLOADS)
+        /*val directory = File(Environment.DIRECTORY_DOWNLOADS)
 
 
+ val direct = File(
+          Environment.getExternalStorageDirectory()
+             .toString() + "/FOLDER_NAME")
 
         // TODO: change up line code path to our desire path
         if (!directory.exists()) {
             directory.mkdirs()
-        }
+        }*/
+
+
 
         val downloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
 
@@ -39,12 +44,24 @@ abstract class DownloadImage {
         val request = DownloadManager.Request(downloadUri).apply {
             setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
                 .setAllowedOverRoaming(false)
-                .setTitle("dall_e_$title.jpg")
-                .setDescription("")
-                .setDestinationInExternalPublicDir(
-                    directory.toString(),
-                    "dall_e_$title.jpg"
-                )
+                .setDestinationInExternalPublicDir("/ImageAI",title)
+
+
+        }
+        val directory = File(
+            Environment.getExternalStorageDirectory()
+                .toString() + "/ImageAI")
+
+        val dir = (directory)
+        if (!dir.exists()){
+            dir.mkdirs()
+        }
+        val file = (directory)
+        if (file.exists()){
+            file.delete()
+            file.createNewFile()
+        } else{
+            file.createNewFile()
         }
 
 
@@ -60,7 +77,7 @@ abstract class DownloadImage {
                     downloading = false
                 }
                 val status = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS))
-                msg = statusMessage(directory, status)
+                msg = statusMessage(file, status)
                 if (msg != lastMsg) {
                     downloadImageState.postValue(msg)
                     lastMsg = msg ?: ""
@@ -69,7 +86,29 @@ abstract class DownloadImage {
             }
         }.start()
 
+
+//        val direct = File(
+//            Environment.getExternalStorageDirectory()
+//                .toString() + "/FOLDER_NAME"
+//        )
+//        if (!direct.exists()) {
+//            direct.mkdirs()
+//        }
+//        val mgr = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+//        val downloadUri: Uri = Uri.parse(url)
+//        val request = DownloadManager.Request(
+//            downloadUri
+//        )
+//        request.setAllowedNetworkTypes(
+//            DownloadManager.Request.NETWORK_WIFI
+//                    or DownloadManager.Request.NETWORK_MOBILE
+//        )
+//            .setAllowedOverRoaming(false).setTitle("Demo")
+//            .setDescription("Something useful. No, really.")
+//            .setDestinationInExternalPublicDir("/FOLDER_NAME", "test.jpg")
+//        mgr.enqueue(request)
     }
+
 
     private fun getRandomString(): String {
         val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')

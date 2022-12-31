@@ -1,27 +1,38 @@
 package com.webomax.openai.presentation.generate_image
 
 
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.view.PointerIconCompat.load
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.muratozturk.click_shrink_effect.applyClickShrink
 import com.webomax.openai.R
-import com.webomax.openai.RecentActivity
 import com.webomax.openai.common.*
 import com.webomax.openai.databinding.FragmentGenerateImageBinding
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.appopen.AppOpenAd.load
+import com.google.android.gms.ads.reward.RewardItem
+import com.google.android.gms.ads.reward.RewardedVideoAd
+import com.google.android.gms.ads.reward.RewardedVideoAdListener
+import com.google.android.gms.ads.rewarded.RewardedAd
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
+import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAd.load
 
 
 @AndroidEntryPoint
 class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
+    private var mRewardedAd: RewardedAd? = null
+    private final var TAG = "MainActivity"
 
 
     private val viewModel: GenerateImageViewModel by viewModels()
@@ -33,15 +44,16 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
 
     }
 
+
+    @SuppressLint("SuspiciousIndentation")
     private fun initViewCollect() {
         with(viewModel) {
             with(binding) {
 
-                recent.setOnClickListener{
-                  val intent = Intent(this@GenerateImageFragment.requireContext(),RecentActivity::class.java)
-                    startActivity(intent)
-
-                }
+//                recent.setOnClickListener{
+//                    recentImage()
+//
+//                }
                 generateButton.setOnClickListener {
 
                     if (promptEditText.text.toString().isEmpty().not()) {
@@ -128,6 +140,11 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
             GenerateImageFragmentDirections.actionGenerateImageFragmentToImageDetailFragment(
                 imageUrl
             )
+        )
+    }
+    private fun recentImage(){
+        findNavController().navigate(
+            GenerateImageFragmentDirections.actionGenerateImageFragmentToRecentFragment()
         )
     }
 

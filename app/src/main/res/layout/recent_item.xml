@@ -7,12 +7,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-
-
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/generatedImageCard"
-        android:layout_width="0dp"
-        android:layout_height="420dp"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
         android:layout_columnWeight="1"
         android:layout_margin="@dimen/margin_small"
         android:clickable="true"
@@ -22,16 +19,18 @@
         app:cardElevation="@dimen/card_elevation_small"
         app:strokeColor="@color/primary"
         app:strokeWidth="2dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints,DuplicateClickableBoundsCheck"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="4dp">
 
 
         <ImageView
+            android:id="@+id/image_recent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
             android:adjustViewBounds="true"
-            tools:src="@tools:sample/avatars"
-            />
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/avatars" />
 
     </com.google.android.material.card.MaterialCardView>
 

@@ -6,11 +6,11 @@
     android:layout_height="match_parent">
 
 
-    <GridView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/gridview"
-        android:numColumns="3"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        tools:listitem="@layout/recent_item"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
@@ -19,4 +19,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foregroundGravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

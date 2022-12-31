@@ -7,25 +7,27 @@
     android:padding="10dp"
     tools:context=".presentation.generate_image.GenerateImageFragment">
 
-    <ImageView
-        android:id="@+id/recent"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_baseline_folder_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editDesc"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/recent"-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:src="@drawable/ic_baseline_folder_24"-->
+<!--        android:layout_marginEnd="40dp"-->
+<!--        android:backgroundTint="@color/black_overlay"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/editDesc"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
     <TextView
         android:id="@+id/editDesc"
         android:layout_width="251dp"
         android:layout_height="27dp"
-        android:layout_marginStart="95dp"
         android:gravity="center"
         android:text="@string/enter_description"
         android:textColor="@color/primary"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
