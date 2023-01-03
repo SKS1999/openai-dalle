@@ -26,6 +26,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import java.io.File
 import java.util.*
 
 class DashboardActivity : AppCompatActivity() {
@@ -76,10 +77,8 @@ class DashboardActivity : AppCompatActivity() {
         updateprofile_btn.setOnClickListener{
                 updateProfile()
 
-
-
-
         }
+
 
 
         loadProfile()
@@ -121,7 +120,7 @@ class DashboardActivity : AppCompatActivity() {
 
             }
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+
             }
 
         })
@@ -172,7 +171,6 @@ class DashboardActivity : AppCompatActivity() {
     private fun checkLoggedInState(){
         val user = auth.currentUser
         if (user!=null){
-
             profile.setImageURI(user.photoUrl)
         }else{
 

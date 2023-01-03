@@ -2,10 +2,12 @@ package com.webomax.openai.adapter
 
 import android.graphics.BitmapFactory
 import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.webomax.openai.R
 import java.io.File
@@ -23,9 +25,11 @@ class MyAdapter (var items: Int): RecyclerView.Adapter<MyAdapter.MyViewHolder>()
         val path = File(Environment.getExternalStorageDirectory(), "/ImageAI")
 
         if (path.exists()) {
-           var listItems = path.list()
-            val bmp = BitmapFactory.decodeFile(path.listFiles()[position].absolutePath)
+           var listItems = path.listFiles()
+            val bmp = BitmapFactory.decodeFile(listItems[position].absolutePath)
             holder.image.setImageBitmap(bmp)
+        }else{
+            Log.e("Photos","No Files Found")
         }
     }
 

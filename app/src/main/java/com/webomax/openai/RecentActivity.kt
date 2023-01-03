@@ -2,9 +2,10 @@ package com.webomax.openai
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
@@ -12,7 +13,6 @@ import com.webomax.openai.adapter.MyAdapter
 import com.webomax.openai.presentation.MainActivity
 import java.io.File
 
-@Suppress("UNREACHABLE_CODE")
 class RecentActivity : AppCompatActivity() {
     lateinit var home: BottomNavigationItemView
     lateinit var recent: BottomNavigationItemView
@@ -21,8 +21,8 @@ class RecentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recent)
-        home= findViewById(R.id.home)
-        recent= findViewById(R.id.recent)
+        home= findViewById<BottomNavigationItemView>(R.id.home)
+        recent= findViewById<BottomNavigationItemView>(R.id.recent)
         initView()
         home.setOnClickListener {
             startActivity(Intent(this@RecentActivity, MainActivity::class.java))
@@ -46,10 +46,16 @@ class RecentActivity : AppCompatActivity() {
 
         if (path.exists()) {
             listItems = path.list().size
+        }else{
+            Toast.makeText(this,"No Files Found",Toast.LENGTH_SHORT).show()
         }
         return listItems
 
 
 
+
+
     }
+
+
 }
