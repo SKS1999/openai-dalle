@@ -159,13 +159,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
-        android:text="Update Profile"
+        android:text="@string/update_profile"
+        android:clickable="true"
+        android:onClick="@string/Select_An_Image"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="@+id/UserImage"
         app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="@+id/UserImage"
         app:layout_constraintTop_toBottomOf="@+id/UserImage"
-        app:layout_constraintVertical_bias="0.216" />
+        app:layout_constraintVertical_bias="0.216"
+        android:focusable="true"
+        tools:ignore="UsingOnClickInXml" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AlertDialog.Builder
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.UriLoader
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.*
@@ -39,11 +40,11 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var auth :FirebaseAuth
     private lateinit var dialog: AlertDialog
     private lateinit var storage:FirebaseStorage
-    private lateinit var selectimg: Uri
+    private  lateinit var selectimg: Uri
     private lateinit var updateprofile_btn : Button
     lateinit var binding :ActivityDashboardBinding
-    var DatabaseReference : DatabaseReference? = null
-    var Database : FirebaseDatabase? = null
+    private var DatabaseReference : DatabaseReference? = null
+    private var Database : FirebaseDatabase? = null
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +68,7 @@ class DashboardActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
+        selectimg = Uri.EMPTY
 
         profile.setOnClickListener{
             val intent= Intent()
@@ -75,7 +77,12 @@ class DashboardActivity : AppCompatActivity() {
             startActivityForResult(intent,1)
         }
         updateprofile_btn.setOnClickListener{
+            if(selectimg !=null){
                 updateProfile()
+            }else{
+                Toast.makeText(this,"Select a photo to Update Profile",Toast.LENGTH_SHORT).show()
+            }
+
 
         }
 
@@ -144,9 +151,7 @@ class DashboardActivity : AppCompatActivity() {
     }
     private fun updateProfile(){
         auth.currentUser.let { user ->
-            val UserName = name_txt.text.toString()
             val profileUpdates = UserProfileChangeRequest.Builder()
-                .setDisplayName(UserName)
                 .setPhotoUri(selectimg)
                 .build()
 

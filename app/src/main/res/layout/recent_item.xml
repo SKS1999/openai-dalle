@@ -14,14 +14,13 @@
         android:layout_margin="@dimen/margin_small"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?attr/selectableItemBackground"
         app:cardCornerRadius="10dp"
         app:cardElevation="@dimen/card_elevation_small"
         app:strokeColor="@color/primary"
         app:strokeWidth="2dp"
-        tools:ignore="MissingConstraints,DuplicateClickableBoundsCheck"
         tools:layout_editor_absoluteX="9dp"
-        tools:layout_editor_absoluteY="4dp">
+        tools:layout_editor_absoluteY="4dp"
+        tools:ignore="MissingConstraints">
 
 
         <ImageView
