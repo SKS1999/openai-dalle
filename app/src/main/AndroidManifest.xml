@@ -26,21 +26,21 @@
        
 
         <activity
-            android:name=".RecentActivity"
+            android:name=".RecentFiles.RecentActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".DashboardActivity"
+            android:name=".Profile.DashboardActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Profile.RegisterActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -54,7 +54,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".loginActivity"
+            android:name=".Profile.loginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

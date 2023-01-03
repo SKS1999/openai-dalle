@@ -1,4 +1,4 @@
-package com.webomax.openai
+package com.webomax.openai.Profile
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -7,18 +7,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AlertDialog.Builder
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.model.UriLoader
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
+import com.webomax.openai.R
 import com.webomax.openai.databinding.ActivityDashboardBinding
 import com.webomax.openai.presentation.MainActivity
 import de.hdodenhof.circleimageview.CircleImageView
@@ -27,7 +24,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import java.io.File
 import java.util.*
 
 class DashboardActivity : AppCompatActivity() {
@@ -52,6 +48,8 @@ class DashboardActivity : AppCompatActivity() {
         binding = ActivityDashboardBinding.inflate (layoutInflater)
         setContentView(binding.root)
 
+        //initialized components
+
         id_txt = findViewById(R.id.textid)
         name_txt = findViewById(R.id.textname)
         email_txt = findViewById(R.id.textemail)
@@ -59,16 +57,15 @@ class DashboardActivity : AppCompatActivity() {
         back_btn = findViewById(R.id.backbutton)
         delete_btn = findViewById(R.id.buttondelete)
         updateprofile_btn = findViewById(R.id.UpdateProfile)
-
-
         Database = FirebaseDatabase.getInstance()
         storage = FirebaseStorage.getInstance()
-
-        DatabaseReference = Database?.reference?.child("profile")
-
         auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
         selectimg = Uri.EMPTY
+
+        DatabaseReference = Database?.reference?.child("profile")
+
+
 
         profile.setOnClickListener{
             val intent= Intent()
@@ -76,23 +73,16 @@ class DashboardActivity : AppCompatActivity() {
             intent.type = "image/*"
             startActivityForResult(intent,1)
         }
-        updateprofile_btn.setOnClickListener{
-            if(selectimg !=null){
+        updateprofile_btn.setOnClickListener {
+            if (selectimg != null) {
                 updateProfile()
-            }else{
-                Toast.makeText(this,"Select a photo to Update Profile",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Select a photo to Update Profile", Toast.LENGTH_SHORT).show()
             }
-
-
         }
 
 
-
         loadProfile()
-
-
-
-
 
         back_btn.setOnClickListener{
             startActivity(Intent(this,MainActivity::class.java))
@@ -102,7 +92,7 @@ class DashboardActivity : AppCompatActivity() {
             currentUser?.delete()?.addOnCompleteListener{
                 if (it.isSuccessful){
                     Toast.makeText(this,"Account is successfully removed.",Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this,RegisterActivity::class.java)
+                    val intent = Intent(this, RegisterActivity::class.java)
                     startActivity(intent)
                     finish()
 
@@ -182,8 +172,5 @@ class DashboardActivity : AppCompatActivity() {
 
         }
     }
-
-
-
 
 }

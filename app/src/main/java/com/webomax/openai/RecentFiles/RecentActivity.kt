@@ -1,4 +1,4 @@
-package com.webomax.openai
+package com.webomax.openai.RecentFiles
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.webomax.openai.R
 import com.webomax.openai.adapter.MyAdapter
 import com.webomax.openai.presentation.MainActivity
 import java.io.File
@@ -27,7 +28,6 @@ class RecentActivity : AppCompatActivity() {
         home.setOnClickListener {
             startActivity(Intent(this@RecentActivity, MainActivity::class.java))
             finish()
-
         }
         recent.setOnClickListener {
             startActivity(Intent(this@RecentActivity, RecentActivity::class.java))
@@ -37,7 +37,7 @@ class RecentActivity : AppCompatActivity() {
     private fun initView() {
         val recyclerView = findViewById<RecyclerView>(R.id.gridview)
         recyclerView.adapter = MyAdapter(getItemSize())
-        recyclerView.layoutManager = GridLayoutManager(this,2)
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
     }
 
 
@@ -47,7 +47,7 @@ class RecentActivity : AppCompatActivity() {
         if (path.exists()) {
             listItems = path.list().size
         }else{
-            Toast.makeText(this,"No Files Found",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "No Files Found", Toast.LENGTH_SHORT).show()
         }
         return listItems
 

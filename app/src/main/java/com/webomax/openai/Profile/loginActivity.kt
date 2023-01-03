@@ -1,28 +1,23 @@
-package com.webomax.openai
+package com.webomax.openai.Profile
 
-import android.content.ContentProviderClient
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.SyncStateContract.Helpers.update
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.webomax.openai.R
 import com.webomax.openai.presentation.MainActivity
-import kotlin.math.sign
 
 
 class loginActivity : AppCompatActivity() {
@@ -50,7 +45,7 @@ class loginActivity : AppCompatActivity() {
 
 
        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-           .requestIdToken(getString((R.string.default_web_client_id)))
+           .requestIdToken(getString((com.firebase.ui.auth.R.string.default_web_client_id)))
            .requestEmail()
            .build()
         googleSignInClient =GoogleSignIn.getClient(this,gso)
@@ -66,7 +61,7 @@ class loginActivity : AppCompatActivity() {
         }
 
         txt_register.setOnClickListener {
-            startActivity(Intent(this@loginActivity,RegisterActivity::class.java))
+            startActivity(Intent(this@loginActivity, RegisterActivity::class.java))
             finish()
         }
         btn_login.setOnClickListener {
@@ -131,7 +126,7 @@ class loginActivity : AppCompatActivity() {
 
     private fun signInGoogle(){
         val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent,RC_SIGN_IN)
+        startActivityForResult(signInIntent, RC_SIGN_IN)
 
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

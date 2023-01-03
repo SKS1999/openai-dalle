@@ -1,6 +1,5 @@
-package com.webomax.openai
+package com.webomax.openai.Profile
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,13 +8,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.room.Database
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.webomax.openai.R
 import com.webomax.openai.presentation.MainActivity
 
 class RegisterActivity : AppCompatActivity() {
@@ -44,10 +41,6 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(Intent(this, loginActivity::class.java))
         }
         register()
-
-
-
-
     }
 
 

@@ -1,40 +1,21 @@
 package com.webomax.openai.presentation
 
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.pm.PermissionGroupInfo
-import android.location.SettingInjectorService
-import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.provider.MediaStore.Audio.Genres
-import android.provider.Settings
-import android.util.Log
-import android.webkit.PermissionRequest
 import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.Toast
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.app.Person
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.firebase.auth.FirebaseAuth
 import com.webomax.openai.*
-import com.webomax.openai.data.model.GeneratedImage
+import com.webomax.openai.Profile.DashboardActivity
+import com.webomax.openai.Profile.loginActivity
+import com.webomax.openai.RecentFiles.RecentActivity
 import com.webomax.openai.databinding.ActivityMainBinding
-import com.webomax.openai.presentation.generate_image.GenerateImageFragment
-import com.webomax.openai.presentation.generate_image.GenerateImageFragment_GeneratedInjector
-import com.webomax.openai.presentation.generate_image.GenerateImageViewModel
-import com.webomax.openai.presentation.image_detail.ImageDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -84,11 +65,11 @@ class MainActivity : AppCompatActivity() {
        btn_logout.setOnClickListener{
             FirebaseAuth.getInstance().signOut()
 
-            startActivity(Intent(this@MainActivity,loginActivity::class.java))
+            startActivity(Intent(this@MainActivity, loginActivity::class.java))
             finish()
         }
         btn_profile.setOnClickListener{
-            startActivity(Intent(this,DashboardActivity::class.java))
+            startActivity(Intent(this, DashboardActivity::class.java))
             finish()
         }
 
