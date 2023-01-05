@@ -70,14 +70,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/promptInputLayout" />
 
-    <com.apachat.loadingbutton.core.customViews.CircularProgressButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/rewardAd_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="Watch AD"
-        android:textColor="@color/white"
-        android:background="@color/cardview_shadow_start_color"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="9dp"
         app:layout_constraintEnd_toEndOf="parent"

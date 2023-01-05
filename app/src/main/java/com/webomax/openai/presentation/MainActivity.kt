@@ -33,7 +33,6 @@ import com.webomax.openai.presentation.generate_image.GenerateImageFragment
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private final var TAG = "MainActivity"
-    private var mRewardedAd: RewardedAd ?= null
 
 
     lateinit var btn_logout:ImageButton
@@ -41,10 +40,8 @@ class MainActivity : AppCompatActivity() {
     private var isReadPermissionGranted = false
     private lateinit var mAuth: FirebaseAuth
     lateinit var btn_profile:ImageButton
-
     lateinit var home:BottomNavigationItemView
     lateinit var recent :BottomNavigationItemView
-    private var rewardedAd_btn : MaterialButton  ?=null
 
     @SuppressLint("SuspiciousIndentation", "MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +50,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        rewardedAd_btn = findViewById(R.id.rewardAd_btn)
         home= findViewById(R.id.home)
         recent= findViewById(R.id.recent)
         btn_logout = findViewById<ImageButton>(R.id.logout)

@@ -114,7 +114,6 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
 
                 Toast.makeText(this@GenerateImageFragment.requireContext(), "Reward Earned..", Toast.LENGTH_SHORT).show()
             }
-
         }
         else{
             Toast.makeText(this@GenerateImageFragment.requireContext(), "Ad wasn't loaded", Toast.LENGTH_SHORT).show()
