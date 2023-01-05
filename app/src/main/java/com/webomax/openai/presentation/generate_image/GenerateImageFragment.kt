@@ -47,12 +47,12 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
                 .setTestDeviceIds(listOf("TEST_DEVICE_ID_HERE","TEST_DEVICE_TO_HERE"))
                 .build()
         )
-        loadRewadAd()
+        loadRewardAd()
 
 
 
     }
-    private fun loadRewadAd(){
+    private fun loadRewardAd(){
         var adRequest = AdRequest.Builder().build()
         RewardedAd.load(this@GenerateImageFragment.requireContext(),"ca-app-pub-3940256099942544/5224354917",
             adRequest,
