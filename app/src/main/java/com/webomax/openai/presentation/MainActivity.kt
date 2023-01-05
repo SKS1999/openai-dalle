@@ -1,41 +1,59 @@
 package com.webomax.openai.presentation
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable.ProgressDrawableSize
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.rewarded.RewardItem
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.firebase.auth.FirebaseAuth
-import com.webomax.openai.*
 import com.webomax.openai.Profile.DashboardActivity
 import com.webomax.openai.Profile.loginActivity
 import com.webomax.openai.RecentFiles.RecentActivity
-import com.webomax.openai.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import com.google.android.gms.ads.rewarded.RewardedAd
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
+import com.google.android.material.button.MaterialButton
+import com.webomax.openai.R
+import com.webomax.openai.presentation.generate_image.GenerateImageFragment
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private val STORAGE_PERMISSION_CODE = 200
-    private lateinit var binding: ActivityMainBinding
+    private final var TAG = "MainActivity"
+    private var mRewardedAd: RewardedAd ?= null
+
+
     lateinit var btn_logout:ImageButton
     private lateinit var permissionLancher :ActivityResultLauncher<Array<String>>
     private var isReadPermissionGranted = false
     private lateinit var mAuth: FirebaseAuth
     lateinit var btn_profile:ImageButton
+
     lateinit var home:BottomNavigationItemView
-    lateinit var recent: BottomNavigationItemView
-    @SuppressLint("SuspiciousIndentation")
+    lateinit var recent :BottomNavigationItemView
+    private var rewardedAd_btn : MaterialButton  ?=null
+
+    @SuppressLint("SuspiciousIndentation", "MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
 
+
+        rewardedAd_btn = findViewById(R.id.rewardAd_btn)
         home= findViewById(R.id.home)
         recent= findViewById(R.id.recent)
         btn_logout = findViewById<ImageButton>(R.id.logout)
@@ -46,16 +64,12 @@ class MainActivity : AppCompatActivity() {
         }
         requestPermission()
 
-
-
-
-
-                home.setOnClickListener {
+        home.setOnClickListener {
                     startActivity(Intent(this@MainActivity, MainActivity::class.java))
                     finish()
 
                 }
-                 recent.setOnClickListener {
+        recent.setOnClickListener {
 
                     startActivity(Intent(this@MainActivity, RecentActivity::class.java))
                      finish()
@@ -72,6 +86,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, DashboardActivity::class.java))
             finish()
         }
+
+
 
 
 
@@ -107,6 +123,8 @@ class MainActivity : AppCompatActivity() {
             permissionLancher.launch(PermissionRequest.toTypedArray())
         }
     }
+
+
 
 
 

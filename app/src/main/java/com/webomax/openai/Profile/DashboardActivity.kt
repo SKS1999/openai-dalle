@@ -152,8 +152,6 @@ class DashboardActivity : AppCompatActivity() {
                         checkLoggedInState()
                         Toast.makeText(this@DashboardActivity,"Successfully updated user profile",Toast.LENGTH_SHORT).show()
                     }
-
-
                 }catch (e:Exception){
                     withContext(Dispatchers.Main) {
                         Toast.makeText(this@DashboardActivity,e.message,Toast.LENGTH_SHORT).show()

@@ -30,7 +30,7 @@ abstract class DownloadImage {
           Environment.getExternalStorageDirectory()
              .toString() + "/FOLDER_NAME")
 
-        // TODO: change up line code path to our desire path
+        // change up line code path to our desire path
         if (!directory.exists()) {
             directory.mkdirs()
         }*/
@@ -48,10 +48,7 @@ abstract class DownloadImage {
 
 
         }
-        val directory = File(
-            Environment.getExternalStorageDirectory()
-                .toString() + "/ImageAI")
-
+        val directory = File(Environment.getExternalStorageDirectory().toString() + "/ImageAI")
         val dir = (directory)
         if (!dir.exists()){
             dir.mkdirs()

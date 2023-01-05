@@ -2,29 +2,34 @@ package com.webomax.openai.presentation.generate_image
 
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.core.view.PointerIconCompat.load
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.rewarded.RewardedAd
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.muratozturk.click_shrink_effect.applyClickShrink
 import com.webomax.openai.R
 import com.webomax.openai.common.*
 import com.webomax.openai.databinding.FragmentGenerateImageBinding
+import com.webomax.openai.presentation.MainActivity
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
 
 
-
 @AndroidEntryPoint
 class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
     private final var TAG = "MainActivity"
-
+    private var mRewardedAd: RewardedAd ?= null
 
     private val viewModel: GenerateImageViewModel by viewModels()
 
@@ -33,18 +38,135 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
         super.onViewCreated(view, savedInstanceState)
         initViewCollect()
 
+        MobileAds.initialize(this@GenerateImageFragment.requireContext()){initstatus->
+            Log.d(TAG,"onCreate:$initstatus")
+
+        }
+        MobileAds.setRequestConfiguration(
+            RequestConfiguration.Builder()
+                .setTestDeviceIds(listOf("TEST_DEVICE_ID_HERE","TEST_DEVICE_TO_HERE"))
+                .build()
+        )
+        loadRewadAd()
+
+
+
     }
+    private fun loadRewadAd(){
+        var adRequest = AdRequest.Builder().build()
+        RewardedAd.load(this@GenerateImageFragment.requireContext(),"ca-app-pub-3940256099942544/5224354917",
+            adRequest,
+            object: RewardedAdLoadCallback(){
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    Log.d(TAG,"onAdFailedToLoad: ${adError.message}")
+                    mRewardedAd = null
+                }
+
+                override fun onAdLoaded(rewardedAd: RewardedAd) {
+                    super.onAdLoaded(rewardedAd)
+                    Log.d(TAG,"onAdLoaded: ")
+                    mRewardedAd = rewardedAd
+
+
+                }
+
+
+            })
+
+
+    }
+    private fun show(){
+        if (mRewardedAd != null) {
+
+            mRewardedAd?.fullScreenContentCallback = object : FullScreenContentCallback(){
+                override fun onAdClicked() {
+                    // Called when a click is recorded for an ad.
+                    Log.d(TAG, "Ad was clicked.")
+                }
+
+                override fun onAdDismissedFullScreenContent() {
+                    // Called when ad is dismissed.
+                    // Set the ad reference to null so you don't show the ad a second time.
+                    Log.d(TAG, "Ad dismissed fullscreen content.")
+                    mRewardedAd = null
+                }
+
+                override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                    super.onAdFailedToShowFullScreenContent(adError)
+                    // Called when ad fails to show.
+                    Log.e(TAG, "Ad failed to show fullscreen content.")
+
+                }
+
+                override fun onAdImpression() {
+                    // Called when an impression is recorded for an ad.
+                    Log.d(TAG, "Ad recorded an impression.")
+                }
+
+                override fun onAdShowedFullScreenContent() {
+                    // Called when ad is shown.
+                    Log.d(TAG, "Ad showed fullscreen content.")
+                }
+
+            }
+            mRewardedAd?.show(this@GenerateImageFragment.requireActivity()){
+                Log.d(TAG,"showRewardedAd")
+
+                Toast.makeText(this@GenerateImageFragment.requireContext(), "Reward Earned..", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        else{
+            Toast.makeText(this@GenerateImageFragment.requireContext(), "Ad wasn't loaded", Toast.LENGTH_SHORT).show()
+
+        }
+
+    }
+    private fun loadAndShowAd(){
+        val progressDialog = ProgressDialog(this@GenerateImageFragment.requireContext())
+        progressDialog.setTitle("Please wait")
+        progressDialog.setMessage("Loading Reward Ad...!")
+        progressDialog.setCanceledOnTouchOutside(false)
+        progressDialog.show()
+
+        var adRequest = AdRequest.Builder().build()
+        RewardedAd.load(this@GenerateImageFragment.requireContext(),"ca-app-pub-3940256099942544/5224354917",
+            adRequest,
+            object: RewardedAdLoadCallback(){
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    Log.d(TAG,"onAdFailedToLoad: ${adError.message}")
+                    mRewardedAd = null
+                    progressDialog.dismiss()
+                    Toast.makeText(this@GenerateImageFragment.requireContext(), "Failed to load the Ad ${adError.message}",
+                        Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onAdLoaded(rewardedAd: RewardedAd) {
+                    super.onAdLoaded(rewardedAd)
+                    Log.d(TAG,"onAdLoaded: ")
+                    mRewardedAd = rewardedAd
+                    progressDialog.dismiss()
+                    show()
+
+                }
+
+
+            })
+
+    }
+
 
 
     @SuppressLint("SuspiciousIndentation")
     private fun initViewCollect() {
         with(viewModel) {
             with(binding) {
+                rewardAdBtn.setOnClickListener{
 
-//                recent.setOnClickListener{
-//                    recentImage()
-//
-//                }
+                    loadAndShowAd()
+                }
+
+
                 generateButton.setOnClickListener {
 
                     if (promptEditText.text.toString().isEmpty().not()) {
@@ -122,10 +244,6 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
 
         }
     }
-
-
-
-
     private fun showImageFullPage(imageUrl: String) {
         findNavController().navigate(
             GenerateImageFragmentDirections.actionGenerateImageFragmentToImageDetailFragment(
@@ -133,10 +251,6 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
             )
         )
     }
-    private fun recentImage(){
-        findNavController().navigate(
-            GenerateImageFragmentDirections.actionGenerateImageFragmentToRecentFragment()
-        )
-    }
+
 
 }
