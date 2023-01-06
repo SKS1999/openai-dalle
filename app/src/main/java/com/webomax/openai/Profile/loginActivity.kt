@@ -1,14 +1,15 @@
 package com.webomax.openai.Profile
 
+import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -25,14 +26,16 @@ class loginActivity : AppCompatActivity() {
         private const val RC_SIGN_IN = 120
     }
      lateinit var txt_register :TextView
-     lateinit var btn_login:Button
+     lateinit var btn_login:CardView
      lateinit var txt_email :EditText
      lateinit var txt_pass :EditText
      lateinit var google_btn : TextView
+     lateinit var forget:TextView
      private lateinit var googleSignInClient: GoogleSignInClient
      lateinit var auth:FirebaseAuth
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -42,6 +45,12 @@ class loginActivity : AppCompatActivity() {
         txt_email = findViewById(R.id.emaillogin)
         txt_pass = findViewById(R.id.passwordlogin)
         google_btn = findViewById(R.id.googlebtn)
+        forget = findViewById(R.id.textView6)
+
+        forget.setOnClickListener{
+            startActivity(Intent(this@loginActivity, ResetActivity::class.java))
+            finish()
+        }
 
 
        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

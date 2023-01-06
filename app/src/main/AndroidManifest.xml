@@ -17,16 +17,22 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OpenAIDallE2"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Profile.ResetActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".RecentFiles.RecentActivity"
-            android:exported="false">
+            android:exported="false"
+            android:requestLegacyExternalStorage="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

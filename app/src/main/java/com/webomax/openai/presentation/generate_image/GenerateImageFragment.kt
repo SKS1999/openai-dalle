@@ -3,7 +3,6 @@ package com.webomax.openai.presentation.generate_image
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -19,7 +18,6 @@ import com.muratozturk.click_shrink_effect.applyClickShrink
 import com.webomax.openai.R
 import com.webomax.openai.common.*
 import com.webomax.openai.databinding.FragmentGenerateImageBinding
-import com.webomax.openai.presentation.MainActivity
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import www.sanju.motiontoast.MotionToast
@@ -153,6 +151,8 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
             })
 
     }
+
+
 
 
 

@@ -165,6 +165,8 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-ads:21.4.0'
     implementation 'com.google.firebase:firebase-ads:20.2.0'
+    //noinspection GradleCompatible
+
 
 
 

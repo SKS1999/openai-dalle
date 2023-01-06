@@ -24,11 +24,8 @@ import com.webomax.openai.Profile.DashboardActivity
 import com.webomax.openai.Profile.loginActivity
 import com.webomax.openai.RecentFiles.RecentActivity
 import dagger.hilt.android.AndroidEntryPoint
-import com.google.android.gms.ads.rewarded.RewardedAd
-import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
-import com.google.android.material.button.MaterialButton
 import com.webomax.openai.R
-import com.webomax.openai.presentation.generate_image.GenerateImageFragment
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
