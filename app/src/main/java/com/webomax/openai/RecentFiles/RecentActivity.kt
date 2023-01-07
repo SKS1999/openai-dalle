@@ -32,7 +32,7 @@ class RecentActivity : AppCompatActivity() {
             startActivity(Intent(this@RecentActivity, RecentActivity::class.java))
             finish()
         }
-    }
+    }  //TODO("ADD A FULLSCREEN VIEW")
     private fun initView() {
         val recyclerView = findViewById<RecyclerView>(R.id.gridview)
         recyclerView.adapter = MyAdapter(getItemSize())

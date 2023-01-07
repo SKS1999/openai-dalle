@@ -28,6 +28,7 @@ import www.sanju.motiontoast.MotionToastStyle
 class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
     private final var TAG = "MainActivity"
     private var mRewardedAd: RewardedAd ?= null
+    private var isclick = false
 
     private val viewModel: GenerateImageViewModel by viewModels()
 
@@ -52,11 +53,12 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
     }
     private fun loadRewardAd(){
         var adRequest = AdRequest.Builder().build()
-        RewardedAd.load(this@GenerateImageFragment.requireContext(),"ca-app-pub-3940256099942544/5224354917",
+        RewardedAd.load(this@GenerateImageFragment.requireContext(),"ca-app-pub-3940256099942544~3347511713",
             adRequest,
             object: RewardedAdLoadCallback(){
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     Log.d(TAG,"onAdFailedToLoad: ${adError.message}")
+                    Toast.makeText(this@GenerateImageFragment.requireContext(),"you can only watch per day",Toast.LENGTH_SHORT).show()
                     mRewardedAd = null
                 }
 
@@ -65,11 +67,10 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
                     Log.d(TAG,"onAdLoaded: ")
                     mRewardedAd = rewardedAd
 
-
                 }
-
-
             })
+
+
 
 
     }
@@ -106,6 +107,7 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
                     Log.d(TAG, "Ad showed fullscreen content.")
                 }
 
+
             }
             mRewardedAd?.show(this@GenerateImageFragment.requireActivity()){
                 Log.d(TAG,"showRewardedAd")
@@ -127,7 +129,7 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
         progressDialog.show()
 
         var adRequest = AdRequest.Builder().build()
-        RewardedAd.load(this@GenerateImageFragment.requireContext(),"ca-app-pub-3940256099942544/5224354917",
+        RewardedAd.load(this@GenerateImageFragment.requireContext(),"ca-app-pub-3940256099942544~3347511713",
             adRequest,
             object: RewardedAdLoadCallback(){
                 override fun onAdFailedToLoad(adError: LoadAdError) {
@@ -152,104 +154,130 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
 
     }
 
+        @SuppressLint("SuspiciousIndentation")
+        private fun initViewCollect() {
+            with(viewModel) {
+                with(binding) {
+
+
+
+                    generateButton.setOnClickListener {
+
+
+                        if (loadAndShowAd() == null) {
+                            generateButton.isEnabled = false
+                            Toast.makeText(
+                                this@GenerateImageFragment.requireContext(),
+                                "Click on Watch Ad to use the app",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            if (loadAndShowAd() != null) {
+                                generateButton.isEnabled = true
+                                Toast.makeText(
+                                    this@GenerateImageFragment.requireContext(),
+                                    "Now you can use the app",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+                            }
+
+                            if (promptEditText.text.toString().isEmpty().not()) {
+
+
+                                generateImage(promptEditText.text.toString(), 1, Sizes.SIZE_256)
+
+                            }
+                        } else {
+                            promptInputLayout.error = getString(R.string.enter_prompt)
+                            Toast.makeText(
+                                this@GenerateImageFragment.requireContext(),
+                                "You can use the app by once a day",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
 
 
 
 
-    @SuppressLint("SuspiciousIndentation")
-    private fun initViewCollect() {
-        with(viewModel) {
-            with(binding) {
-                rewardAdBtn.setOnClickListener{
-
-                    loadAndShowAd()
-                }
-
-
-                generateButton.setOnClickListener {
-
-                    if (promptEditText.text.toString().isEmpty().not()) {
-
-                        generateImage(promptEditText.text.toString(), 1, Sizes.SIZE_256)
-
-                    } else {
-                        promptInputLayout.error = getString(R.string.enter_prompt)
                     }
-
-                }
-                generatedImageCard.applyClickShrink()
+                    generatedImageCard.applyClickShrink()
 
 
-                viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-                    state.collect { response ->
-                        when (response) {
-                            is Resource.Loading -> {
-                                generateButton.startAnimation()
-                                shimmerLayout.apply {
-                                    startShimmer()
-                                    visible()
+                    viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                        state.collect { response ->
+                            when (response) {
+                                is Resource.Loading -> {
+                                    generateButton.startAnimation()
+                                    shimmerLayout.apply {
+                                        startShimmer()
+                                        visible()
+                                    }
+                                    generatedImagesGrid.gone()
                                 }
-                                generatedImagesGrid.gone()
+                                is Resource.Success -> {
+                                    shimmerLayout.apply {
+                                        stopShimmer()
+                                        gone()
+                                    }
+                                    generatedImagesGrid.visible()
+
+                                    generateButton.revertAnimation {
+                                        generateButton.setBackgroundResource(R.drawable.rounded_bg3)
+                                    }
+
+                                    generatedImageView.glideImage(response.data.data[0].url)
+
+
+
+                                    generatedImageCard.setOnClickListener {
+                                        showImageFullPage(response.data.data[0].url)
+                                    }
+
+
+                                }
+                                is Resource.Error -> {
+                                    shimmerLayout.apply {
+                                        stopShimmer()
+                                        gone()
+                                    }
+                                    generatedImagesGrid.gone()
+
+                                    generateButton.revertAnimation {
+                                        generateButton.setBackgroundResource(R.drawable.rounded_bg3)
+                                    }
+
+                                    MotionToast.createColorToast(
+                                        requireActivity(),
+                                        getString(R.string.error),
+                                        response.throwable.localizedMessage ?: "Error",
+                                        MotionToastStyle.ERROR,
+                                        MotionToast.GRAVITY_TOP or MotionToast.GRAVITY_CENTER,
+                                        MotionToast.LONG_DURATION,
+                                        null
+                                    )
+
+                                    Log.e(
+                                        "Response",
+                                        response.throwable.localizedMessage ?: "Error"
+                                    )
+                                }
+                                else -> {}
                             }
-                            is Resource.Success -> {
-                                shimmerLayout.apply {
-                                    stopShimmer()
-                                    gone()
-                                }
-                                generatedImagesGrid.visible()
-
-                                generateButton.revertAnimation {
-                                    generateButton.setBackgroundResource(R.drawable.rounded_bg3)
-                                }
-
-                                generatedImageView.glideImage(response.data.data[0].url)
-
-
-
-                                generatedImageCard.setOnClickListener {
-                                    showImageFullPage(response.data.data[0].url)
-                                }
-
-
-                            }
-                            is Resource.Error -> {
-                                shimmerLayout.apply {
-                                    stopShimmer()
-                                    gone()
-                                }
-                                generatedImagesGrid.gone()
-
-                                generateButton.revertAnimation {
-                                    generateButton.setBackgroundResource(R.drawable.rounded_bg3)
-                                }
-
-                                MotionToast.createColorToast(
-                                    requireActivity(),
-                                    getString(R.string.error),
-                                    response.throwable.localizedMessage ?: "Error",
-                                    MotionToastStyle.ERROR,
-                                    MotionToast.GRAVITY_TOP or MotionToast.GRAVITY_CENTER,
-                                    MotionToast.LONG_DURATION,
-                                    null
-                                )
-
-                                Log.e("Response", response.throwable.localizedMessage ?: "Error")
-                            }
-                            else -> {}
                         }
                     }
                 }
+
             }
-
         }
-    }
-    private fun showImageFullPage(imageUrl: String) {
-        findNavController().navigate(
-            GenerateImageFragmentDirections.actionGenerateImageFragmentToImageDetailFragment(
-                imageUrl
-            )
-        )
-    }
 
+        private fun showImageFullPage(imageUrl: String) {
+            findNavController().navigate(
+                GenerateImageFragmentDirections.actionGenerateImageFragmentToImageDetailFragment(
+                    imageUrl
+                )
+            )
+        }
 
 }
+
+

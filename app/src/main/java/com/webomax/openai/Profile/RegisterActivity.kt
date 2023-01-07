@@ -92,7 +92,9 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(Intent(this, loginActivity::class.java))
         }
         register()
+
     }
+
 
 
 
@@ -163,12 +165,14 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+
+
     @SuppressLint("ResourceType")
     private fun checkAllData(email: String) {
-        if (isAtLeast8 && hasUppercase && hasNumber && hasSymbol && email.length > 0) {
+        if (isAtLeast8 && hasUppercase && hasNumber && hasSymbol && email.length > 0 && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             isRegistrationClickable = true
             tvColor!!.setTextColor(Color.WHITE)
-            btn_register.setCardBackgroundColor(Color.parseColor(getString(R.color.teal_700)))
+            btn_register.setCardBackgroundColor(Color.parseColor(getString(R.color.black_overlay)))
         } else {
             isRegistrationClickable = false
             btn_register!!.setCardBackgroundColor(Color.parseColor(getString(R.color.white)))
@@ -180,30 +184,36 @@ class RegisterActivity : AppCompatActivity() {
         val email = email_regster!!.text.toString()
         val name = name_register!!.text.toString()
         checkEmpty(name, email, password)
+        if (android.util.Patterns.EMAIL_ADDRESS.matcher(email)
+                .matches()
+        ) {
+        } else {
+            email_regster.setError("Invalid Email")
+        }
         if (password.length >= 8) {
             isAtLeast8 = true
-            frameOne!!.setBackgroundColor(Color.parseColor(getString(R.color.teal_700)))
+            frameOne!!.setBackgroundColor(Color.parseColor(getString(R.color.black_overlay)))
         } else {
             isAtLeast8 = false
             frameOne!!.setBackgroundColor(Color.parseColor(getString(R.color.white)))
         }
         if (password.matches(Regex(".*[A-Z].*"))) {
             hasUppercase = true
-            frameTwo!!.setBackgroundColor(Color.parseColor(getString(R.color.teal_700)))
+            frameTwo!!.setBackgroundColor(Color.parseColor(getString(R.color.black_overlay)))
         } else {
             hasUppercase = false
             frameTwo!!.setBackgroundColor(Color.parseColor(getString(R.color.white)))
         }
         if (password.matches(Regex("(.*[0-9].*)"))) {
             hasNumber = true
-            frameThree!!.setBackgroundColor(Color.parseColor(getString(R.color.teal_700)))
+            frameThree!!.setBackgroundColor(Color.parseColor(getString(R.color.black_overlay)))
         } else {
             hasNumber = false
             frameThree!!.setBackgroundColor(Color.parseColor(getString(R.color.white)))
         }
         if (password.matches(Regex("^(?=.*[_.@()]).*$"))) {
             hasSymbol = true
-            frameFour!!.setBackgroundColor(Color.parseColor(getString(R.color.teal_700)))
+            frameFour!!.setBackgroundColor(Color.parseColor(getString(R.color.black_overlay)))
         } else {
             hasSymbol = false
             frameFour!!.setBackgroundColor(Color.parseColor(getString(R.color.white)))
@@ -279,4 +289,6 @@ class RegisterActivity : AppCompatActivity() {
 
             }
     }
+
+
 }
