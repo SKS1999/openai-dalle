@@ -27,8 +27,7 @@ import www.sanju.motiontoast.MotionToastStyle
 @AndroidEntryPoint
 class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
     private final var TAG = "MainActivity"
-    private var mRewardedAd: RewardedAd ?= null
-    private var isclick = false
+    private var mRewardedAd: RewardedAd? = null
 
     private val viewModel: GenerateImageViewModel by viewModels()
 
@@ -37,47 +36,51 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
         super.onViewCreated(view, savedInstanceState)
         initViewCollect()
 
-        MobileAds.initialize(this@GenerateImageFragment.requireContext()){initstatus->
-            Log.d(TAG,"onCreate:$initstatus")
+        MobileAds.initialize(this@GenerateImageFragment.requireContext()) { initstatus ->
+            Log.d(TAG, "onCreate:$initstatus")
 
         }
         MobileAds.setRequestConfiguration(
             RequestConfiguration.Builder()
-                .setTestDeviceIds(listOf("TEST_DEVICE_ID_HERE","TEST_DEVICE_TO_HERE"))
+                .setTestDeviceIds(listOf("TEST_DEVICE_ID_HERE", "TEST_DEVICE_TO_HERE"))
                 .build()
         )
         loadRewardAd()
 
 
-
     }
-    private fun loadRewardAd(){
+
+    private fun loadRewardAd() {
         var adRequest = AdRequest.Builder().build()
-        RewardedAd.load(this@GenerateImageFragment.requireContext(),"ca-app-pub-3940256099942544~3347511713",
+        RewardedAd.load(this@GenerateImageFragment.requireContext(),
+            "ca-app-pub-4420523761768723/6091354377",
             adRequest,
-            object: RewardedAdLoadCallback(){
+            object : RewardedAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
-                    Log.d(TAG,"onAdFailedToLoad: ${adError.message}")
-                    Toast.makeText(this@GenerateImageFragment.requireContext(),"you can only watch per day",Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "onAdFailedToLoad: ${adError.message}")
+                    Toast.makeText(
+                        this@GenerateImageFragment.requireContext(),
+                        "you can only watch per day",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     mRewardedAd = null
                 }
 
                 override fun onAdLoaded(rewardedAd: RewardedAd) {
                     super.onAdLoaded(rewardedAd)
-                    Log.d(TAG,"onAdLoaded: ")
+                    Log.d(TAG, "onAdLoaded: ")
                     mRewardedAd = rewardedAd
 
                 }
             })
 
 
-
-
     }
-    private fun show(){
+
+    private fun show() {
         if (mRewardedAd != null) {
 
-            mRewardedAd?.fullScreenContentCallback = object : FullScreenContentCallback(){
+            mRewardedAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
                 override fun onAdClicked() {
                     // Called when a click is recorded for an ad.
                     Log.d(TAG, "Ad was clicked.")
@@ -109,19 +112,27 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
 
 
             }
-            mRewardedAd?.show(this@GenerateImageFragment.requireActivity()){
-                Log.d(TAG,"showRewardedAd")
+            mRewardedAd?.show(this@GenerateImageFragment.requireActivity()) {
+                Log.d(TAG, "showRewardedAd")
 
-                Toast.makeText(this@GenerateImageFragment.requireContext(), "Reward Earned..", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@GenerateImageFragment.requireContext(),
+                    "Reward Earned..",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-        }
-        else{
-            Toast.makeText(this@GenerateImageFragment.requireContext(), "Ad wasn't loaded", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(
+                this@GenerateImageFragment.requireContext(),
+                "Ad wasn't loaded",
+                Toast.LENGTH_SHORT
+            ).show()
 
         }
 
     }
-    private fun loadAndShowAd(){
+
+    private fun loadAndShowAd() {
         val progressDialog = ProgressDialog(this@GenerateImageFragment.requireContext())
         progressDialog.setTitle("Please wait")
         progressDialog.setMessage("Loading Reward Ad...!")
@@ -129,20 +140,24 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
         progressDialog.show()
 
         var adRequest = AdRequest.Builder().build()
-        RewardedAd.load(this@GenerateImageFragment.requireContext(),"ca-app-pub-3940256099942544~3347511713",
+        RewardedAd.load(this@GenerateImageFragment.requireContext(),
+            "ca-app-pub-4420523761768723/6091354377",
             adRequest,
-            object: RewardedAdLoadCallback(){
+            object : RewardedAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
-                    Log.d(TAG,"onAdFailedToLoad: ${adError.message}")
+                    Log.d(TAG, "onAdFailedToLoad: ${adError.message}")
                     mRewardedAd = null
                     progressDialog.dismiss()
-                    Toast.makeText(this@GenerateImageFragment.requireContext(), "Failed to load the Ad ${adError.message}",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@GenerateImageFragment.requireContext(),
+                        "Failed to load the Ad ${adError.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
                 override fun onAdLoaded(rewardedAd: RewardedAd) {
                     super.onAdLoaded(rewardedAd)
-                    Log.d(TAG,"onAdLoaded: ")
+                    Log.d(TAG, "onAdLoaded: ")
                     mRewardedAd = rewardedAd
                     progressDialog.dismiss()
                     show()
@@ -154,130 +169,137 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
 
     }
 
-        @SuppressLint("SuspiciousIndentation")
-        private fun initViewCollect() {
-            with(viewModel) {
-                with(binding) {
+    @SuppressLint("SuspiciousIndentation")
+    private fun initViewCollect() {
+        with(viewModel) {
+            with(binding) {
+                rewardAdBtn.setOnClickListener {
+                    if (loadAndShowAd() == null) {
+                        generateButton.isEnabled = false
+                        Toast.makeText(
+                            this@GenerateImageFragment.requireContext(),
+                            "Click on Watch Ad to use the app",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        if (loadAndShowAd() != null) {
+                            generateButton.isEnabled = true
+                            Toast.makeText(
+                                this@GenerateImageFragment.requireContext(),
+                                "Now you can use the app",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                        }
+                    } else {
+                        Toast.makeText(
+                            this@GenerateImageFragment.requireContext(),
+                            "You can use the app by once a day",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
 
 
 
                     generateButton.setOnClickListener {
+                        if (promptEditText.text.toString().isEmpty().not()) {
 
 
-                        if (loadAndShowAd() == null) {
-                            generateButton.isEnabled = false
-                            Toast.makeText(
-                                this@GenerateImageFragment.requireContext(),
-                                "Click on Watch Ad to use the app",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            if (loadAndShowAd() != null) {
-                                generateButton.isEnabled = true
-                                Toast.makeText(
-                                    this@GenerateImageFragment.requireContext(),
-                                    "Now you can use the app",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-
-                            }
-
-                            if (promptEditText.text.toString().isEmpty().not()) {
+                            generateImage(promptEditText.text.toString(), 1, Sizes.SIZE_256)
 
 
-                                generateImage(promptEditText.text.toString(), 1, Sizes.SIZE_256)
-
-                            }
                         } else {
                             promptInputLayout.error = getString(R.string.enter_prompt)
-                            Toast.makeText(
-                                this@GenerateImageFragment.requireContext(),
-                                "You can use the app by once a day",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            generateButton.error="You can only use the app once a day"
+
+
                         }
 
 
 
 
-                    }
-                    generatedImageCard.applyClickShrink()
+
+                        generatedImageCard.applyClickShrink()
 
 
-                    viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-                        state.collect { response ->
-                            when (response) {
-                                is Resource.Loading -> {
-                                    generateButton.startAnimation()
-                                    shimmerLayout.apply {
-                                        startShimmer()
-                                        visible()
+                        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                            state.collect { response ->
+                                when (response) {
+                                    is Resource.Loading -> {
+                                        generateButton.startAnimation()
+                                        shimmerLayout.apply {
+                                            startShimmer()
+                                            visible()
+                                        }
+                                        generatedImagesGrid.gone()
                                     }
-                                    generatedImagesGrid.gone()
+                                    is Resource.Success -> {
+                                        shimmerLayout.apply {
+                                            stopShimmer()
+                                            gone()
+                                        }
+                                        generatedImagesGrid.visible()
+
+                                        generateButton.revertAnimation {
+                                            generateButton.setBackgroundResource(R.drawable.rounded_bg3)
+                                        }
+
+                                        generatedImageView.glideImage(response.data.data[0].url)
+
+
+
+                                        generatedImageCard.setOnClickListener {
+                                            showImageFullPage(response.data.data[0].url)
+                                        }
+
+
+                                    }
+                                    is Resource.Error -> {
+                                        shimmerLayout.apply {
+                                            stopShimmer()
+                                            gone()
+                                        }
+                                        generatedImagesGrid.gone()
+
+                                        generateButton.revertAnimation {
+                                            generateButton.setBackgroundResource(R.drawable.rounded_bg3)
+                                        }
+
+                                        MotionToast.createColorToast(
+                                            requireActivity(),
+                                            getString(R.string.error),
+                                            response.throwable.localizedMessage ?: "Error",
+                                            MotionToastStyle.ERROR,
+                                            MotionToast.GRAVITY_TOP or MotionToast.GRAVITY_CENTER,
+                                            MotionToast.LONG_DURATION,
+                                            null
+                                        )
+
+                                        Log.e(
+                                            "Response",
+                                            response.throwable.localizedMessage ?: "Error"
+                                        )
+                                    }
+                                    else -> {}
                                 }
-                                is Resource.Success -> {
-                                    shimmerLayout.apply {
-                                        stopShimmer()
-                                        gone()
-                                    }
-                                    generatedImagesGrid.visible()
-
-                                    generateButton.revertAnimation {
-                                        generateButton.setBackgroundResource(R.drawable.rounded_bg3)
-                                    }
-
-                                    generatedImageView.glideImage(response.data.data[0].url)
-
-
-
-                                    generatedImageCard.setOnClickListener {
-                                        showImageFullPage(response.data.data[0].url)
-                                    }
-
-
-                                }
-                                is Resource.Error -> {
-                                    shimmerLayout.apply {
-                                        stopShimmer()
-                                        gone()
-                                    }
-                                    generatedImagesGrid.gone()
-
-                                    generateButton.revertAnimation {
-                                        generateButton.setBackgroundResource(R.drawable.rounded_bg3)
-                                    }
-
-                                    MotionToast.createColorToast(
-                                        requireActivity(),
-                                        getString(R.string.error),
-                                        response.throwable.localizedMessage ?: "Error",
-                                        MotionToastStyle.ERROR,
-                                        MotionToast.GRAVITY_TOP or MotionToast.GRAVITY_CENTER,
-                                        MotionToast.LONG_DURATION,
-                                        null
-                                    )
-
-                                    Log.e(
-                                        "Response",
-                                        response.throwable.localizedMessage ?: "Error"
-                                    )
-                                }
-                                else -> {}
                             }
                         }
                     }
-                }
 
+                }
             }
         }
+    }
 
-        private fun showImageFullPage(imageUrl: String) {
-            findNavController().navigate(
-                GenerateImageFragmentDirections.actionGenerateImageFragmentToImageDetailFragment(
-                    imageUrl
+            private fun showImageFullPage(imageUrl: String) {
+                findNavController().navigate(
+                    GenerateImageFragmentDirections.actionGenerateImageFragmentToImageDetailFragment(
+                        imageUrl
+                    )
                 )
-            )
-        }
+            }
 
-}
+
+    }
+
 
 
