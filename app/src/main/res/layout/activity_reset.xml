@@ -9,12 +9,12 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="@dimen/_10sdp"
         tools:ignore="MissingConstraints">
     <ImageView
         android:id="@+id/backbutton_rest"
-        android:layout_width="70dp"
-        android:layout_height="56dp"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_50sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="#D3D0D0"
@@ -23,27 +23,27 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="300dp"
-        android:layout_height="250dp"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_200sdp"
         android:backgroundTint="#D3D0D0"
-        app:cardCornerRadius="25dp"
+        app:cardCornerRadius="@dimen/_25sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:padding="10dp"
+        android:padding="@dimen/_10sdp"
 
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/EmailAddress"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_50sdp"
             android:gravity="top"
             android:ems="10"
             android:hint="Email"
-            android:layout_marginTop="50dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,9 +55,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginStart="100dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginStart="@dimen/_80sdp"
+            android:layout_marginEnd="@dimen/_80sdp"
+            android:layout_marginBottom="@dimen/_40sdp"
             android:backgroundTint="@color/black"
             android:text="Reset"
 

@@ -173,30 +173,31 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
     private fun initViewCollect() {
         with(viewModel) {
             with(binding) {
-                rewardAdBtn.setOnClickListener {
-                    if (loadAndShowAd() == null) {
-                        generateButton.isEnabled = false
-                        Toast.makeText(
-                            this@GenerateImageFragment.requireContext(),
-                            "Click on Watch Ad to use the app",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        if (loadAndShowAd() != null) {
-                            generateButton.isEnabled = true
-                            Toast.makeText(
-                                this@GenerateImageFragment.requireContext(),
-                                "Now you can use the app",
-                                Toast.LENGTH_SHORT
-                            ).show()
-
-                        }
-                    } else {
-                        Toast.makeText(
-                            this@GenerateImageFragment.requireContext(),
-                            "You can use the app by once a day",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+//                rewardAdBtn.setOnClickListener {
+//                    if (loadAndShowAd() == null) {
+//                        generateButton.isEnabled = false
+//                        Toast.makeText(
+//                            this@GenerateImageFragment.requireContext(),
+//                            "Click on Watch Ad to use the app",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                        if (loadAndShowAd() != null) {
+//                            generateButton.isEnabled = true
+//                            Toast.makeText(
+//                                this@GenerateImageFragment.requireContext(),
+//                                "Now you can use the app",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+//
+//                        }
+//                    } else {
+//                        Toast.makeText(
+//                            this@GenerateImageFragment.requireContext(),
+//                            "You can use the app by once a day",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    }
+//                }
 
 
 
@@ -288,7 +289,7 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
                 }
             }
         }
-    }
+
 
             private fun showImageFullPage(imageUrl: String) {
                 findNavController().navigate(

@@ -9,13 +9,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
+        android:layout_margin="@dimen/_15sdp"
         android:orientation="vertical">
+        <ImageView
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+
+            />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="@dimen/_20sdp"
             android:gravity="center"
             android:text="Create Account"
             android:textSize="35sp"
@@ -24,7 +33,7 @@
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="match_parent">
 
             <EditText
                 android:id="@+id/Nameregister"
@@ -40,8 +49,8 @@
             android:id="@+id/tvNameError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
             android:gravity="center|start"
             android:text="Please enter name"
             android:textColor="@android:color/holo_red_dark"
@@ -50,8 +59,8 @@
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="5dp">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_5sdp">
 
             <EditText
                 android:id="@+id/emailregister"
@@ -67,8 +76,8 @@
             android:id="@+id/tvEmailError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
             android:gravity="center|start"
             android:text="Please enter email"
             android:textColor="@android:color/holo_red_dark"
@@ -77,8 +86,8 @@
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_5sdp"
             app:passwordToggleEnabled="true">
 
             <EditText
@@ -95,8 +104,8 @@
             android:id="@+id/tvPasswordError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
             android:gravity="center|start"
             android:text="Please enter password"
             android:textColor="@android:color/holo_red_dark"
@@ -105,26 +114,26 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:text="Password should be"
              />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/frameOne"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
                 app:cardBackgroundColor="@color/white">
 
                 <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
                     android:layout_gravity="center"
                     android:background="@drawable/ic_baseline_check_24" />
 
@@ -133,8 +142,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:gravity="center|start"
                 android:text="At least 8 characters"
                  />
@@ -143,20 +152,20 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/_25sdp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/frameTwo"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
                 app:cardBackgroundColor="@color/white"
                >
 
                 <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
                     android:layout_gravity="center"
                     android:background="@drawable/ic_baseline_check_24" />
 
@@ -165,8 +174,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:gravity="center|start"
                 android:text="Minimum one uppercase" />
 
@@ -174,19 +183,19 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/_25sdp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/frameThree"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
                 app:cardBackgroundColor="@color/white">
 
                 <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
                     android:layout_gravity="center"
                     android:background="@drawable/ic_baseline_check_24" />
 
@@ -195,8 +204,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:gravity="center|start"
                 android:text="Minimum one number"
                  />
@@ -205,20 +214,20 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/_25sdp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/frameFour"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
                 app:cardBackgroundColor="@color/white"
                 >
 
                 <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
                     android:layout_gravity="center"
                     android:background="@drawable/ic_baseline_check_24" />
 
@@ -227,8 +236,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:gravity="center|start"
                 android:text="Minimum one symbol"
                  />
@@ -258,13 +267,13 @@
             android:id="@+id/Logintxt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:text="Already have an account?"
             android:textAlignment="center"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:text="Or"
             android:textAlignment="center"/>
         <TextView
@@ -272,9 +281,9 @@
             style="@style/FirebaseUI.Button.AccountChooser.GoogleButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:text="Sign in with google"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textAlignment="center"
 
             />

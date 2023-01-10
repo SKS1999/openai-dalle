@@ -3,19 +3,18 @@ package com.webomax.openai.Profile
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.webomax.openai.R
+import com.webomax.openai.RecentFiles.RecentActivity
 import com.webomax.openai.databinding.ActivityDashboardBinding
 import com.webomax.openai.presentation.MainActivity
 import de.hdodenhof.circleimageview.CircleImageView
@@ -31,7 +30,6 @@ class DashboardActivity : AppCompatActivity() {
     lateinit var name_txt : TextView
     lateinit var email_txt : TextView
     lateinit var profile : CircleImageView
-    lateinit var back_btn : ImageView
     lateinit var delete_btn : Button
     private lateinit var auth :FirebaseAuth
     private lateinit var dialog: AlertDialog
@@ -41,6 +39,10 @@ class DashboardActivity : AppCompatActivity() {
     lateinit var binding :ActivityDashboardBinding
     private var DatabaseReference : DatabaseReference? = null
     private var Database : FirebaseDatabase? = null
+    lateinit var btn_logout: Button
+    lateinit var home :BottomNavigationItemView
+    lateinit var recent:BottomNavigationItemView
+    lateinit var btn_profile:BottomNavigationItemView
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,11 +52,16 @@ class DashboardActivity : AppCompatActivity() {
 
         //initialized components
 
+        home= findViewById(R.id.home)
+        recent = findViewById(R.id.recent)
+        btn_profile = findViewById(R.id.Profile)
+
         id_txt = findViewById(R.id.textid)
         name_txt = findViewById(R.id.textname)
         email_txt = findViewById(R.id.textemail)
+        btn_logout = findViewById(R.id.logout)
         profile = findViewById(R.id.UserImage)
-        back_btn = findViewById(R.id.backbutton)
+
         delete_btn = findViewById(R.id.buttondelete)
         updateprofile_btn = findViewById(R.id.UpdateProfile)
         Database = FirebaseDatabase.getInstance()
@@ -84,8 +91,10 @@ class DashboardActivity : AppCompatActivity() {
 
         loadProfile()
 
-        back_btn.setOnClickListener{
-            startActivity(Intent(this,MainActivity::class.java))
+        btn_logout.setOnClickListener{
+            FirebaseAuth.getInstance().signOut()
+
+            startActivity(Intent(this@DashboardActivity, loginActivity::class.java))
             finish()
         }
         delete_btn.setOnClickListener {
@@ -102,6 +111,21 @@ class DashboardActivity : AppCompatActivity() {
                 }
             }
 
+        }
+        home.setOnClickListener {
+            startActivity(Intent(this@DashboardActivity, MainActivity::class.java))
+            finish()
+
+        }
+        recent.setOnClickListener {
+
+            startActivity(Intent(this@DashboardActivity, RecentActivity::class.java))
+            finish()
+        }
+
+        btn_profile.setOnClickListener{
+            startActivity(Intent(this@DashboardActivity, DashboardActivity::class.java))
+            finish()
         }
     }
     private fun loadProfile(){

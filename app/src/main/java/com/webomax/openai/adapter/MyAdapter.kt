@@ -21,7 +21,7 @@ class MyAdapter (var items: Int): RecyclerView.Adapter<MyAdapter.MyViewHolder>()
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val path = File(Environment.getExternalStorageDirectory(), "/ImageAI")
+        val path = File(Environment.DIRECTORY_PICTURES+ "/ImageAI")
 
         if (path.exists()) {
            var listItems = path.list()

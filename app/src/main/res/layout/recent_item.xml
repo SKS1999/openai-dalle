@@ -9,15 +9,15 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="@dimen/_180sdp"
         android:layout_columnWeight="1"
         android:layout_margin="@dimen/margin_small"
         android:clickable="true"
         android:focusable="true"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="@dimen/_10sdp"
         app:cardElevation="@dimen/card_elevation_small"
         app:strokeColor="@color/primary"
-        app:strokeWidth="2dp"
+        app:strokeWidth="@dimen/_2sdp"
         tools:layout_editor_absoluteX="9dp"
         tools:layout_editor_absoluteY="4dp"
         tools:ignore="MissingConstraints">

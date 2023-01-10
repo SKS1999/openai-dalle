@@ -8,11 +8,10 @@
     tools:context=".presentation.generate_image.GenerateImageFragment">
     <TextView
         android:id="@+id/editDesc"
-        android:layout_width="251dp"
-        android:layout_height="27dp"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_25sdp"
         android:gravity="center"
         android:text="@string/enter_description"
-        android:textColor="@color/primary"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,14 +22,14 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:gravity="top"
         android:hint="@string/prompt_hint"
         android:textColorHint="@color/primary"
-        app:boxCornerRadiusBottomEnd="20dp"
-        app:boxCornerRadiusBottomStart="20dp"
-        app:boxCornerRadiusTopEnd="20dp"
-        app:boxCornerRadiusTopStart="20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
+        app:boxCornerRadiusBottomStart="@dimen/_20sdp"
+        app:boxCornerRadiusTopEnd="@dimen/_20sdp"
+        app:boxCornerRadiusTopStart="@dimen/_20sdp"
         app:boxStrokeColor="@color/primary"
         app:boxStrokeWidth="@dimen/stroke_width_small"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,15 +39,15 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/promptEditText"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="@dimen/_100sdp"
             android:gravity="top"
             android:inputType="textMultiLine"
             android:overScrollMode="always"
             android:scrollbarStyle="insideInset"
             android:scrollbars="vertical"
             android:singleLine="true"
-            android:textColor="@color/light_blue_A400"
-            android:textColorHint="@color/black" />
+            android:textColor="@color/primary"
+           />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -57,8 +56,8 @@
     <com.apachat.loadingbutton.core.customViews.CircularProgressButton
         android:id="@+id/generateButton"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
         android:layout_weight="1"
         android:background="@drawable/rounded_bg3"
         android:text="@string/generate"
@@ -74,11 +73,11 @@
         android:id="@+id/rewardAd_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="@dimen/_10sdp"
         android:text="Watch AD"
         android:onClick="Tap"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="9dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_9sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/generateButton" />
@@ -87,9 +86,9 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="458dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="10dp"
+        android:layout_height="@dimen/_300sdp"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -98,14 +97,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:orientation="vertical">
 
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/shimmerLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:visibility="visible">
 
                 <GridLayout
@@ -116,8 +115,8 @@
 
 
                     <View
-                        android:layout_width="0dp"
-                        android:layout_height="420dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_250sdp"
                         android:layout_columnWeight="1"
                         android:layout_margin="@dimen/margin_small"
                         android:background="@drawable/radius_corner" />
@@ -130,14 +129,14 @@
                 android:id="@+id/generatedImagesGrid"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:columnCount="1"
                 android:visibility="gone">
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/generatedImageCard"
-                    android:layout_width="0dp"
-                    android:layout_height="420dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_320sdp"
                     android:layout_columnWeight="1"
                     android:layout_margin="@dimen/margin_small"
                     android:clickable="true"

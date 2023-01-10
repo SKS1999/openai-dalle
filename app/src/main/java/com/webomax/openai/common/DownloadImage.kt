@@ -7,9 +7,6 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Environment
 import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.FirebaseDatabase
-import com.webomax.openai.R
 import java.io.File
 
 abstract class DownloadImage {
@@ -44,11 +41,11 @@ abstract class DownloadImage {
         val request = DownloadManager.Request(downloadUri).apply {
             setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
                 .setAllowedOverRoaming(false)
-                .setDestinationInExternalPublicDir("/ImageAI",title)
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES,"/ImageAI/.jpg")
 
 
         }
-        val directory = File(Environment.getExternalStorageDirectory().toString() + "/ImageAI")
+        val directory = File(Environment.DIRECTORY_PICTURES + "/ImageAI")
         val dir = (directory)
         if (!dir.exists()){
             dir.mkdirs()

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.webomax.openai.Profile.DashboardActivity
 import com.webomax.openai.R
 import com.webomax.openai.adapter.MyAdapter
 import com.webomax.openai.presentation.MainActivity
@@ -16,6 +17,7 @@ import java.io.File
 class RecentActivity : AppCompatActivity() {
     private lateinit var home: BottomNavigationItemView
     private lateinit var recent: BottomNavigationItemView
+    private lateinit var profile:BottomNavigationItemView
     private var listItems=0
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +25,7 @@ class RecentActivity : AppCompatActivity() {
         setContentView(R.layout.activity_recent)
         home= findViewById(R.id.home)
         recent= findViewById(R.id.recent)
+        profile = findViewById(R.id.Profile)
         initView()
         home.setOnClickListener {
             startActivity(Intent(this@RecentActivity, MainActivity::class.java))
@@ -30,6 +33,10 @@ class RecentActivity : AppCompatActivity() {
         }
         recent.setOnClickListener {
             startActivity(Intent(this@RecentActivity, RecentActivity::class.java))
+            finish()
+        }
+        profile.setOnClickListener {
+            startActivity(Intent(this@RecentActivity, DashboardActivity::class.java))
             finish()
         }
     }  //TODO("ADD A FULLSCREEN VIEW")
@@ -40,8 +47,9 @@ class RecentActivity : AppCompatActivity() {
     }
 
 
+    //TODO(NO ITEMS ARE SHOWING INSIDE THE ACTIVITY)
     private fun getItemSize():Int{
-        val path = File(Environment.getExternalStorageDirectory(), "/ImageAI")
+        val path = File(Environment.DIRECTORY_PICTURES+"/ImageAI")
         if (path.exists()) {
             listItems = path.list().size
         }

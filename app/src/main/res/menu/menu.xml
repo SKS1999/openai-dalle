@@ -7,4 +7,7 @@
     <item android:title="Recent"
         android:icon="@drawable/ic_baseline_folder_24"
         android:id="@+id/recent"/>
+    <item android:title="Profile"
+        android:icon="@drawable/ic_baseline_perm_identity_24"
+        android:id="@+id/Profile"/>
 </menu>

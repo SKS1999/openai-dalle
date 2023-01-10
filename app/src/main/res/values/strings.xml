@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OpenAI</string>
+    <string name="app_name">MaxAI</string>
     <string name="generate">Generate</string>
     <string name="prompt_hint">Prompt</string>
     <string name="error">Error!</string>

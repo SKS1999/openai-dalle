@@ -23,6 +23,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Profile.loginActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Profile.ResetActivity"
             android:exported="false">
             <meta-data
@@ -59,7 +66,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Profile.loginActivity"
+            android:name=".Profile.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -74,7 +81,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-4420523761768723~3116301708"/>
+            android:value="ca-app-pub-4420523761768723~3116301708" />
     </application>
 
 </manifest>

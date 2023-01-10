@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_small"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="@dimen/_10sdp"
         app:cardElevation="@dimen/card_elevation_small">
 
         <LinearLayout
@@ -25,22 +25,22 @@
             <ImageView
                 android:id="@+id/generatedImageView"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="@dimen/_250sdp"
                 android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="@dimen/_10sdp"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/download"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:background="@drawable/rounded_bg2"
                     android:text="@string/download"
@@ -52,7 +52,7 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/close"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"

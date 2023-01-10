@@ -9,13 +9,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
+        android:layout_margin="@dimen/_20sdp"
         android:orientation="vertical">
+        <ImageView
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="@dimen/_25sdp"
             android:gravity="center"
             android:text="Log In"
 
@@ -25,8 +33,8 @@
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="5dp">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_5sdp">
 
             <EditText
                 android:id="@+id/emaillogin"
@@ -42,8 +50,8 @@
             android:id="@+id/tvEmailError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
             android:gravity="center|start"
             android:text="Please enter email"
             android:textColor="@android:color/holo_red_dark"
@@ -52,8 +60,8 @@
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_5sdp"
             app:passwordToggleEnabled="true">
 
             <EditText
@@ -70,8 +78,8 @@
             android:id="@+id/tvPasswordError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
             android:gravity="center|start"
             android:text="Please enter password"
             android:textColor="@android:color/holo_red_dark"
@@ -82,9 +90,9 @@
             android:layout_height="wrap_content"
             android:text="Forget Password?"
             android:textAlignment="gravity"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:gravity="right"
 
             />
@@ -93,8 +101,8 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/loginbtn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:cardBackgroundColor="#dcdcdc">
 
             <TextView
@@ -113,13 +121,13 @@
             android:id="@+id/Registertxt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:text="Doesn't have an account?"
             android:textAlignment="center"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:text="Or"
             android:textAlignment="center"/>
         <TextView
@@ -127,9 +135,9 @@
             style="@style/FirebaseUI.Button.AccountChooser.GoogleButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:text="Sign in with google"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textAlignment="center"
 
             />
