@@ -12,6 +12,7 @@ import com.webomax.openai.R
 import java.io.File
 
 class MyAdapter (var items: Int): RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+
     var item:Int = items
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -21,7 +22,7 @@ class MyAdapter (var items: Int): RecyclerView.Adapter<MyAdapter.MyViewHolder>()
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val path = File(Environment.DIRECTORY_PICTURES+ "/ImageAI")
+        val path = File(Environment.getExternalStorageDirectory().toString()+ "/ImageAI")
 
         if (path.exists()) {
            var listItems = path.list()
@@ -41,4 +42,5 @@ class MyAdapter (var items: Int): RecyclerView.Adapter<MyAdapter.MyViewHolder>()
 
         val image: ImageView= itemView.findViewById(R.id.image_recent)
     }
+
 }

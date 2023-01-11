@@ -21,9 +21,17 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
     <style name="ThemeOverlay.OpenAIDallE2.FullscreenContainer" parent="">
         <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
         <item name="fullscreenTextColor">@color/light_blue_A200</item>
+    </style>
+
+    <style name="Theme.OpenAIDallE2.Fullscreen" parent="Theme.OpenAIDallE2">
+        <item name="android:actionBarStyle">@style/Widget.Theme.OpenAIDallE2.ActionBar.Fullscreen
+        </item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
     </style>
 
 

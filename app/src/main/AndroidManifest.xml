@@ -23,6 +23,18 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".FullScreenImageViewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_full_screen_image_view"
+            android:theme="@style/Theme.OpenAIDallE2.Fullscreen" />
+        <activity
+            android:name=".FullscreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_fullscreen"
+            android:theme="@style/Theme.OpenAIDallE2.Fullscreen" />
+        <activity
             android:name=".Profile.loginActivity"
             android:exported="false">
             <meta-data
