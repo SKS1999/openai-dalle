@@ -12,7 +12,7 @@ import com.webomax.openai.R
 import java.io.File
 
 class MyAdapter (var items: Int): RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
-
+    
     var item:Int = items
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

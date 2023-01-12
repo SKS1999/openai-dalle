@@ -89,7 +89,7 @@
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_5sdp"
@@ -100,6 +100,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/textname"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textid"
         tools:ignore="MissingConstraints" />
@@ -124,8 +125,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/UserImage"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="@dimen/_100sdp"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_120sdp"
         android:padding="@dimen/_1sdp"
         android:background="@drawable/ic_baseline_perm_identity_24"
         app:civ_border_color="@color/white"

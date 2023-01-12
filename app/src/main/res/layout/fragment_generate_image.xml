@@ -56,7 +56,8 @@
     <com.apachat.loadingbutton.core.customViews.CircularProgressButton
         android:id="@+id/generateButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_35sdp"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_weight="1"
         android:background="@drawable/rounded_bg3"

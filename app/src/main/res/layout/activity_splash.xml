@@ -5,11 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_overlay"
     tools:context=".Profile.SplashActivity">
 
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageView"
         android:layout_width="@dimen/_70sdp"
         android:layout_height="@dimen/_70sdp"
@@ -26,7 +25,7 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="@dimen/_10sdp"
         android:text="MaxAI"
-        android:textColor="@color/white"
+        android:textColor="@color/primary"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="@+id/circleImageView"
         app:layout_constraintStart_toStartOf="@+id/circleImageView"
@@ -34,11 +33,14 @@
         tools:ignore="MissingConstraints" />
 
     <ProgressBar
-        android:layout_width="@dimen/_60sdp"
-        android:layout_height="@dimen/_60sdp"
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="@dimen/_190sdp"
+        android:layout_height="@dimen/_5sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="@dimen/_10sdp"
+        android:progress="@integer/google_play_services_version"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

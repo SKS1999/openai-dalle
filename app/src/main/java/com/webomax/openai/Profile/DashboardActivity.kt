@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -78,14 +79,12 @@ class DashboardActivity : AppCompatActivity() {
             val intent= Intent()
             intent.action = Intent.ACTION_GET_CONTENT
             intent.type = "image/*"
-            startActivityForResult(intent,1)
+            startActivityForResult(intent,2)
         }
         updateprofile_btn.setOnClickListener {
-            if (selectimg != null) {
+
                 updateProfile()
-            } else {
-                Toast.makeText(this, "Select a photo to Update Profile", Toast.LENGTH_SHORT).show()
-            }
+
         }
 
 
@@ -114,19 +113,20 @@ class DashboardActivity : AppCompatActivity() {
         }
         home.setOnClickListener {
             startActivity(Intent(this@DashboardActivity, MainActivity::class.java))
-            finish()
+
 
         }
         recent.setOnClickListener {
 
             startActivity(Intent(this@DashboardActivity, RecentActivity::class.java))
-            finish()
+
         }
 
         btn_profile.setOnClickListener{
             startActivity(Intent(this@DashboardActivity, DashboardActivity::class.java))
-            finish()
+
         }
+        Glide.with(this).load(currentUser?.photoUrl).into(profile)
     }
     private fun loadProfile(){
 
@@ -168,6 +168,7 @@ class DashboardActivity : AppCompatActivity() {
             val profileUpdates = UserProfileChangeRequest.Builder()
                 .setPhotoUri(selectimg)
                 .build()
+
 
             CoroutineScope(Dispatchers.IO).launch {
                 try {
