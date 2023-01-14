@@ -47,18 +47,19 @@ class MainActivity : AppCompatActivity() {
 
         home.setOnClickListener {
                     startActivity(Intent(this@MainActivity, MainActivity::class.java))
-                    finish()
+            finish()
 
                 }
         recent.setOnClickListener {
 
                     startActivity(Intent(this@MainActivity, RecentActivity::class.java))
-                     finish()
+            finish()
                 }
 
         btn_profile.setOnClickListener{
             startActivity(Intent(this, DashboardActivity::class.java))
             finish()
+
         }
 
 

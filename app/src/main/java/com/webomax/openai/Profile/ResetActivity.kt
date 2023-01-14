@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.github.hariprasanths.bounceview.BounceView
 import com.google.firebase.auth.FirebaseAuth
 import com.webomax.openai.R
 
@@ -25,6 +26,9 @@ class ResetActivity : AppCompatActivity() {
         rest_btn=findViewById(R.id.Reset_btn)
         Email_txt =findViewById(R.id.EmailAddress)
         back_btn=findViewById(R.id.backbutton_rest)
+
+        BounceView.addAnimTo(rest_btn)
+        BounceView.addAnimTo(back_btn)
         auth=FirebaseAuth.getInstance()
 
         rest_btn.setOnClickListener{

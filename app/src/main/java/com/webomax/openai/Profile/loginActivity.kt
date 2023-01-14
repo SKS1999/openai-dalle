@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import com.github.hariprasanths.bounceview.BounceView
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -23,7 +24,7 @@ import com.webomax.openai.presentation.MainActivity
 
 class loginActivity : AppCompatActivity() {
     companion object{
-        private const val RC_SIGN_IN = 120
+        private const val RC_SIGN_IN = 2
     }
      lateinit var txt_register :TextView
      lateinit var btn_login:CardView
@@ -46,6 +47,10 @@ class loginActivity : AppCompatActivity() {
         txt_pass = findViewById(R.id.passwordlogin)
         google_btn = findViewById(R.id.googlebtn)
         forget = findViewById(R.id.textView6)
+
+        BounceView.addAnimTo(btn_login)
+        BounceView.addAnimTo(google_btn)
+
 
         forget.setOnClickListener{
             startActivity(Intent(this@loginActivity, ResetActivity::class.java))
@@ -147,7 +152,7 @@ class loginActivity : AppCompatActivity() {
             if (task.isSuccessful){
                 try{
                     val account= task.getResult(ApiException::class.java)!!
-                    Log.d("loginActivity","firebaswAuthWithGoogle:"+ account.id)
+                    Log.d("loginActivity","firebaseAuthWithGoogle:"+ account.id)
                     firebaseAuthWithGoogle(account.idToken!!)
                 }catch (e:ApiException){
                     Log.w("loginActivity","Google sign in Failed",e)
@@ -163,12 +168,12 @@ class loginActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener (this){ task ->
                 if(task.isSuccessful) {
-                    Log.d("loginActivity","signwithCredentila:success")
+                    Log.d("loginActivity","signInWithCredential:success")
                     val intent = Intent(this,MainActivity::class.java)
                     startActivity(intent)
                     finish()
                 }else{
-                    Log.w("loginActivity","signInwithCredential:failure",task.exception)
+                    Log.w("loginActivity","signInWithCredential:failure",task.exception)
                 }
 
             }

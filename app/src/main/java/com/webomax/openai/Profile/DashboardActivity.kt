@@ -5,10 +5,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.widget.*
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.github.hariprasanths.bounceview.BounceView
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -16,6 +19,7 @@ import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.webomax.openai.R
 import com.webomax.openai.RecentFiles.RecentActivity
+import com.webomax.openai.Subscription.SubsMainActivity
 import com.webomax.openai.databinding.ActivityDashboardBinding
 import com.webomax.openai.presentation.MainActivity
 import de.hdodenhof.circleimageview.CircleImageView
@@ -24,13 +28,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import java.util.*
 
 class DashboardActivity : AppCompatActivity() {
     lateinit var id_txt : TextView
     lateinit var name_txt : TextView
     lateinit var email_txt : TextView
     lateinit var profile : CircleImageView
+    lateinit var subs_btn:Button
     lateinit var delete_btn : Button
     private lateinit var auth :FirebaseAuth
     private lateinit var dialog: AlertDialog
@@ -56,15 +60,23 @@ class DashboardActivity : AppCompatActivity() {
         home= findViewById(R.id.home)
         recent = findViewById(R.id.recent)
         btn_profile = findViewById(R.id.Profile)
-
         id_txt = findViewById(R.id.textid)
         name_txt = findViewById(R.id.textname)
         email_txt = findViewById(R.id.textemail)
         btn_logout = findViewById(R.id.logout)
         profile = findViewById(R.id.UserImage)
-
         delete_btn = findViewById(R.id.buttondelete)
         updateprofile_btn = findViewById(R.id.UpdateProfile)
+        subs_btn = findViewById(R.id.subs_btn)
+
+        BounceView.addAnimTo(home)
+        BounceView.addAnimTo(recent)
+        BounceView.addAnimTo(btn_profile)
+        BounceView.addAnimTo(btn_logout)
+        BounceView.addAnimTo(updateprofile_btn)
+        BounceView.addAnimTo(delete_btn)
+
+
         Database = FirebaseDatabase.getInstance()
         storage = FirebaseStorage.getInstance()
         auth = FirebaseAuth.getInstance()
@@ -84,6 +96,10 @@ class DashboardActivity : AppCompatActivity() {
         updateprofile_btn.setOnClickListener {
 
                 updateProfile()
+
+        }
+        subs_btn.setOnClickListener{
+            startActivity(Intent(this@DashboardActivity, SubsMainActivity::class.java))
 
         }
 
@@ -131,7 +147,7 @@ class DashboardActivity : AppCompatActivity() {
     private fun loadProfile(){
 
         val user = auth.currentUser
-        val userreference =DatabaseReference?.child(user?.uid!!)
+        val userreference =DatabaseReference?.child(user!!.uid)
         id_txt.text =user?.uid
         email_txt.text= user?.email
         name_txt.text = user?.displayName

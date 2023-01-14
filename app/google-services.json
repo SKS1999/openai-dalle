@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "746343893260",
+    "firebase_url": "https://openai-ecdd4-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "openai-ecdd4",
     "storage_bucket": "openai-ecdd4.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "746343893260-ldhpnmo62pi5k83gdh91oje16do8eelt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.webomax.openai",
+            "certificate_hash": "2dd6be42d36c0b8075531c28470db386c76f228f"
+          }
+        },
         {
           "client_id": "746343893260-u8g28g6meqcipij9j5o2nuhdog6fju8l.apps.googleusercontent.com",
           "client_type": 3

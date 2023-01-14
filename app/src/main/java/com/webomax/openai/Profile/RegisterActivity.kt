@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import com.github.hariprasanths.bounceview.BounceView
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -72,6 +73,9 @@ class RegisterActivity : AppCompatActivity() {
         pass_register = findViewById(R.id.passwordregister)
         name_register = findViewById(R.id.Nameregister)
         txt_login = findViewById(R.id.Logintxt)
+
+        BounceView.addAnimTo(btn_register)
+        BounceView.addAnimTo(googlebtn)
         auth = FirebaseAuth.getInstance()
         Database = FirebaseDatabase.getInstance()
         DatabaseReference = Database?.reference!!.child("profile")

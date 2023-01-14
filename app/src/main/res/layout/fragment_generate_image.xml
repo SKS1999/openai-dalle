@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:background="@color/white"
     tools:context=".presentation.generate_image.GenerateImageFragment">
     <TextView
         android:id="@+id/editDesc"
@@ -75,6 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
+        android:background="@drawable/rounded_bg3"
         android:text="Watch AD"
         android:onClick="Tap"
         android:layout_marginTop="@dimen/_10sdp"

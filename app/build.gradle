@@ -15,8 +15,9 @@ android {
 
     defaultConfig {
         applicationId "com.webomax.openai"
-        minSdk 21
+        minSdk 24
         targetSdk 33
+        multiDexEnabled true
         versionCode 3
         versionName "1.2"
 
@@ -34,8 +35,9 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+        coreLibraryDesugaringEnabled true
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -43,7 +45,7 @@ android {
 }
 
 dependencies {
-
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
@@ -149,26 +151,24 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
     implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation 'com.google.firebase:firebase-core:9.6.1'
+    implementation 'com.google.firebase:firebase-core:21.1.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.android.gms:play-services-auth:20.4.0'
 
-    implementation 'com.android.billingclient:billing:5.1.0'
-    implementation 'com.android.billingclient:billing-ktx:5.1.0'
 
-    implementation 'com.android.billingclient:billing:5.0.0'
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
     implementation 'com.google.guava:guava:24.1-jre'
     implementation 'com.intuit.sdp:sdp-android:1.1.0'
 
 
     implementation 'com.google.android.gms:play-services-ads:21.4.0'
-    implementation 'com.google.firebase:firebase-ads:20.2.0'
+    implementation 'com.google.firebase:firebase-ads:21.4.0'
     //noinspection GradleCompatible
-
-    implementation "com.android.billingclient:billing-ktx:5.1.0"
+    implementation 'com.github.moisoni97:google-inapp-billing:1.1.1'
+    implementation 'io.github.hariprasanths:bounceview-android:0.2.0'
 
 
 
