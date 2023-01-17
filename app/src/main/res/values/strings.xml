@@ -35,6 +35,7 @@
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="license_key">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvNozhqWyzuvPRsVcfgjCoTQMBRZNYpqfkseR6FPcFrty7h6qmEHeVLhY/ESSFV0bo2ZTfTsQOYm1kEoh6ix2cSCKuxEaHJUSwJx2aOwPY3xFpyklTeoik5UfxY5ezcgpb9HuZPI1k/cl5rmkCJX3cYiX+YKsnGDONJuQDf74XWEGUF83NeYFB+ipJXhIX5hNkJMeKaVSkoXGmTd7TDULtcgulfC1tdKPykFAJ0zXjmYlvON5jVLox08RDldqR6oDtEJXEWlOdolcWwU37Q9ceUGyfbeSl9b5V5uTQ9LRUo1AA2JmiEXbe0q6O32yoQqJrX504NLIKHKuxnCz5i4SWQIDAQAB</string>
     <string name="title_activity_full_screen_image_view">FullScreenImageViewActivity</string>
 
 </resources>

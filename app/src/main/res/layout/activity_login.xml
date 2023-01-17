@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Profile.RegisterActivity">
 
     <LinearLayout
@@ -26,7 +27,7 @@
             android:layout_marginBottom="@dimen/_25sdp"
             android:gravity="center"
             android:text="Log In"
-
+            android:textColor="@color/black_overlay"
             android:textSize="35sp"
             android:textStyle="bold" />
 
@@ -34,6 +35,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/black_overlay"
             android:layout_marginTop="@dimen/_5sdp">
 
             <EditText
@@ -62,6 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_5sdp"
+            android:background="@color/black_overlay"
             app:passwordToggleEnabled="true">
 
             <EditText
@@ -70,6 +73,7 @@
                 android:layout_height="match_parent"
                 android:hint="Enter Password"
                 android:inputType="textPassword"
+                android:backgroundTint="@color/black_overlay"
                 android:textColor="@android:color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -92,6 +96,7 @@
             android:textAlignment="gravity"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_5sdp"
+            android:textColor="@color/black_overlay"
             android:layout_marginBottom="@dimen/_10sdp"
             android:gravity="right"
 
@@ -123,11 +128,13 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_15sdp"
             android:text="Doesn't have an account?"
+            android:textColor="@color/black_overlay"
             android:textAlignment="center"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_15sdp"
+            android:textColor="@color/black_overlay"
             android:text="Or"
             android:textAlignment="center"/>
         <TextView

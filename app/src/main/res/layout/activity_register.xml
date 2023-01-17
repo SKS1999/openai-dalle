@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Profile.RegisterActivity">
 
     <LinearLayout
@@ -28,12 +29,14 @@
             android:layout_marginBottom="@dimen/_20sdp"
             android:gravity="center"
             android:text="Create Account"
+            android:textColor="@color/black_overlay"
             android:textSize="35sp"
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
+            android:background="@color/black_overlay"
             android:layout_height="match_parent">
 
             <EditText
@@ -61,6 +64,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/black_overlay"
             android:layout_marginTop="@dimen/_5sdp">
 
             <EditText
@@ -89,6 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_5sdp"
+            android:background="@color/black_overlay"
             app:passwordToggleEnabled="true">
 
             <EditText
@@ -146,6 +151,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:gravity="center|start"
+                android:textColor="@color/black_overlay"
                 android:text="At least 8 characters"
                  />
 
@@ -177,6 +183,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
+                android:textColor="@color/black_overlay"
                 android:gravity="center|start"
                 android:text="Minimum one uppercase" />
 
@@ -207,6 +214,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
+                android:textColor="@color/black_overlay"
                 android:gravity="center|start"
                 android:text="Minimum one number"
                  />
@@ -239,6 +247,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
+                android:textColor="@color/black_overlay"
                 android:gravity="center|start"
                 android:text="Minimum one symbol"
                  />
@@ -258,6 +267,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Sign Up"
+                android:textColor="@color/black_overlay"
 
                 android:textSize="17sp"
                 android:textStyle="bold" />
@@ -269,12 +279,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_15sdp"
+            android:textColor="@color/black_overlay"
             android:text="Already have an account?"
             android:textAlignment="center"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_15sdp"
+            android:textColor="@color/black_overlay"
             android:text="Or"
             android:textAlignment="center"/>
         <TextView
