@@ -1,90 +1,94 @@
-package com.webomax.openai.Subscription;
+package com.webomax.openai.Subscription
 
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.content.SharedPreferences
+import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.*
+import android.widget.AdapterView.OnItemClickListener
+import androidx.appcompat.app.AppCompatActivity
+import com.webomax.openai.R
+import games.moisoni.google_iab.BillingConnector
+import games.moisoni.google_iab.BillingEventListener
+import games.moisoni.google_iab.enums.ErrorType
+import games.moisoni.google_iab.models.BillingResponse
+import games.moisoni.google_iab.models.PurchaseInfo
+import games.moisoni.google_iab.models.SkuInfo
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.webomax.openai.R;
-
-
-
-import java.util.ArrayList;
-import java.util.List;
-
-import games.moisoni.google_iab.BillingConnector;
-import games.moisoni.google_iab.BillingEventListener;
-import games.moisoni.google_iab.models.BillingResponse;
-import games.moisoni.google_iab.models.PurchaseInfo;
-import games.moisoni.google_iab.models.SkuInfo;
-
-
-public class SubsMainActivity extends AppCompatActivity {
-    ImageView exit_app,done;
-    private BillingConnector billingConnector;
-    private final List<String> consumableIds = new ArrayList<>();
-    private final ArrayList<String> purchaseItemDisplay = new ArrayList<>();
-    private ArrayAdapter arrayAdapter;
-    private ListView listView;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_subs_main);
-        exit_app = findViewById(R.id.exit_app);
-        exit_app.setOnClickListener(v -> {
-            onBackPressed();
-        });
-
-        listView = findViewById(R.id.list_view);
-        arrayAdapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_list_item_1,purchaseItemDisplay);
-        listView.setAdapter(arrayAdapter);
-        arrayAdapter.notifyDataSetChanged();
-        initializeBillingClient();
-        listView.setOnItemClickListener((parent, view, position, id) -> billingConnector.purchase(SubsMainActivity.this, consumableIds.get(position)));
+class SubsMainActivity : AppCompatActivity() {
+   lateinit var exit_app:ImageView
+    private lateinit var billingConnector: BillingConnector
+    private lateinit var Preferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
+    private  var  consumableIds: MutableList<String> = ArrayList()
+    private lateinit var purchaseItemDisplay : ArrayList<String>
+    private lateinit var arrayAdapter: ArrayAdapter<String>
+    private lateinit var listView: ListView
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_subs_main)
+        exit_app = findViewById(R.id.exit_app)
+        exit_app.setOnClickListener(View.OnClickListener { v: View? ->
+            onBackPressed()
+            Preferences = getSharedPreferences("subs", MODE_PRIVATE)
+            editor = Preferences.edit()
+            if (!Preferences.getBoolean("isPremium", false)) {
+                Toast.makeText(this, "Show ads", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "don't show ads", Toast.LENGTH_SHORT).show()
+            }
+        })
+        listView = findViewById(R.id.list_view)
+        arrayAdapter = ArrayAdapter(
+            applicationContext,
+            android.R.layout.simple_list_item_1,
+            purchaseItemDisplay
+        )
+        listView.setAdapter(arrayAdapter)
+        arrayAdapter.notifyDataSetChanged()
+        initializeBillingClient()
+        listView.setOnItemClickListener(OnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
+            billingConnector.purchase(
+                this@SubsMainActivity,
+                consumableIds[position]
+            )
+        })
     }
-    private void initializeBillingClient() {
-        consumableIds.add("weekly");
-        consumableIds.add("monthly");
-        consumableIds.add("yearly");
 
-
-        billingConnector = new BillingConnector(getApplicationContext(), String.valueOf(R.string.license_key)) //”license_key” – public developer key from Play Console
-                .setConsumableIds(consumableIds) //to set consumable ids – call only for consumable products
-                .autoAcknowledge() //legacy option – better call this. Alternatively purchases can be acknowledge via public method “acknowledgePurchase(PurchaseInfo purchaseInfo)”
-                .autoConsume() //legacy option – better call this. Alternatively purchases can be consumed via public method consumePurchase(PurchaseInfo purchaseInfo)”
-                .enableLogging() //to enable logging for debugging throughout the library – this can be skipped
-                .connect(); //to connect billing client with Play Console
-
-        billingConnector.setBillingEventListener(new BillingEventListener() {
-            @Override
-            public void onProductsFetched(@NonNull List<SkuInfo> skuDetails) {
-
-                notifyList(skuDetails);
+    private fun initializeBillingClient() {
+        consumableIds.add("weekly")
+        consumableIds.add("monthly")
+        consumableIds.add("yearly")
+        billingConnector = BillingConnector(
+            applicationContext,
+            R.string.license_key.toString()
+        ) //”license_key” – public developer key from Play Console
+            .setConsumableIds(consumableIds) //to set consumable ids – call only for consumable products
+            .autoAcknowledge() //legacy option – better call this. Alternatively purchases can be acknowledge via public method “acknowledgePurchase(PurchaseInfo purchaseInfo)”
+            .autoConsume() //legacy option – better call this. Alternatively purchases can be consumed via public method consumePurchase(PurchaseInfo purchaseInfo)”
+            .enableLogging() //to enable logging for debugging throughout the library – this can be skipped
+            .connect() //to connect billing client with Play Console
+        billingConnector.setBillingEventListener(object : BillingEventListener {
+            override fun onProductsFetched(skuDetails: List<SkuInfo>) {
+                notifyList(skuDetails)
             }
 
-            @Override
-            public void onPurchasedProductsFetched(@NonNull List<PurchaseInfo> purchases) {
-
-            }
-
-            @Override
-            public void onProductsPurchased(@NonNull List<PurchaseInfo> purchases) {
-                String skuName;
-                for (PurchaseInfo purchaseInfo : purchases) {
-                    skuName = purchaseInfo.getSkuInfo().getTitle();
-                    Toast.makeText(getApplicationContext(), "Product purchased : "+ skuName, Toast.LENGTH_SHORT).show();
+            override fun onPurchasedProductsFetched(purchases: List<PurchaseInfo>) {}
+            override fun onProductsPurchased(purchases: List<PurchaseInfo>) {
+                editor.putBoolean("isPremium", true)
+                editor.apply()
+                var skuName: String
+                for (purchaseInfo in purchases) {
+                    skuName = purchaseInfo.skuInfo.title
+                    Toast.makeText(
+                        applicationContext,
+                        "Product purchased : $skuName",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
-
             }
 
-            @Override
-            public void onPurchaseAcknowledged(@NonNull PurchaseInfo purchase) {
+            override fun onPurchaseAcknowledged(purchase: PurchaseInfo) {
                 /*
                  * Grant user entitlement for NON-CONSUMABLE products and SUBSCRIPTIONS here
                  *
@@ -96,110 +100,88 @@ public class SubsMainActivity extends AppCompatActivity {
                  * To ensure that all valid purchases are acknowledged the library will automatically
                  * check and acknowledge all unacknowledged products at the startup
                  * */
-
-                String acknowledgedSku = purchase.getSku();
-                Log.d("BillingConnector", "Acknowledged: " + acknowledgedSku);
-                Toast.makeText(getApplicationContext(), "Acknowledged : " + acknowledgedSku, Toast.LENGTH_SHORT).show();
+                val acknowledgedSku = purchase.sku
+                Log.d("BillingConnector", "Acknowledged: $acknowledgedSku")
+                Toast.makeText(
+                    applicationContext,
+                    "Acknowledged : $acknowledgedSku",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
-            @Override
-            public void onPurchaseConsumed(@NonNull PurchaseInfo purchase) {
+            override fun onPurchaseConsumed(purchase: PurchaseInfo) {
                 /*
                  * CONSUMABLE products entitlement can be granted either here or in onProductsPurchased
                  * */
-
-                String consumedSkuTitle = purchase.getSkuInfo().getTitle();
-                Log.d("BillingConnector", "Consumed: " + consumedSkuTitle);
-                Toast.makeText(getApplicationContext(), "Consumed : " + consumedSkuTitle, Toast.LENGTH_SHORT).show();
+                val consumedSkuTitle = purchase.skuInfo.title
+                Log.d("BillingConnector", "Consumed: $consumedSkuTitle")
+                Toast.makeText(
+                    applicationContext,
+                    "Consumed : $consumedSkuTitle",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
-            @Override
-            public void onBillingError(@NonNull BillingConnector billingConnector, @NonNull BillingResponse response) {
-                switch (response.getErrorType()) {
-                    case CLIENT_NOT_READY:
-//TODO – client is not ready yet
-                        break;
-                    case CLIENT_DISCONNECTED:
-//TODO – client has disconnected
-                        break;
-                    case SKU_NOT_EXIST:
-//TODO – sku does not exist
-                        break;
-                    case CONSUME_ERROR:
-//TODO – error during consumption
-                        break;
-                    case ACKNOWLEDGE_ERROR:
-//TODO – error during acknowledgment
-                        break;
-                    case ACKNOWLEDGE_WARNING:
-                        /*
-                         * This will be triggered when a purchase can not be acknowledged because the state is PENDING
-                         * A purchase can be acknowledged only when the state is PURCHASED
-                         *
-                         * PENDING transactions usually occur when users choose cash as their form of payment
-                         *
-                         * Here users can be informed that it may take a while until the purchase complete
-                         * and to come back later to receive their purchase
-                         * */
-//TODO – warning during acknowledgment
-                        break;
-                    case FETCH_PURCHASED_PRODUCTS_ERROR:
-//TODO – error occurred while querying purchased products
-                        break;
-                    case BILLING_ERROR:
-//TODO – error occurred during initialization / querying sku details
-                        break;
-                    case USER_CANCELED:
-//TODO – user pressed back or canceled a dialog
-                        break;
-                    case SERVICE_UNAVAILABLE:
-//TODO – network connection is down
-                        break;
-                    case BILLING_UNAVAILABLE:
-//TODO – billing API version is not supported for the type requested
-                        break;
-                    case ITEM_UNAVAILABLE:
-//TODO – requested product is not available for purchase
-                        break;
-                    case DEVELOPER_ERROR:
-//TODO – invalid arguments provided to the API
-                        break;
-                    case ERROR:
-//TODO – fatal error during the API action
-                        break;
-                    case ITEM_ALREADY_OWNED:
-//TODO – failure to purchase since item is already owned
-                        break;
-                    case ITEM_NOT_OWNED:
-//TODO – failure to consume since item is not owned
-                        break;
+            override fun onBillingError(
+                billingConnector: BillingConnector,
+                response: BillingResponse
+            ) {
+                when (response.errorType) {
+                    ErrorType.CLIENT_NOT_READY -> {}
+                    ErrorType.CLIENT_DISCONNECTED -> {}
+                    ErrorType.SKU_NOT_EXIST -> {}
+                    ErrorType.CONSUME_ERROR -> {}
+                    ErrorType.ACKNOWLEDGE_ERROR -> {}
+                    ErrorType.ACKNOWLEDGE_WARNING -> {}
+                    ErrorType.FETCH_PURCHASED_PRODUCTS_ERROR -> {}
+                    ErrorType.BILLING_ERROR -> {}
+                    ErrorType.USER_CANCELED -> {}
+                    ErrorType.SERVICE_UNAVAILABLE -> {}
+                    ErrorType.BILLING_UNAVAILABLE -> {}
+                    ErrorType.ITEM_UNAVAILABLE -> {}
+                    ErrorType.DEVELOPER_ERROR -> {}
+                    ErrorType.ERROR -> {}
+                    ErrorType.ITEM_ALREADY_OWNED -> {
+                        editor.putBoolean("isPremium", true)
+                        editor.apply()
+                        Toast.makeText(
+                            this@SubsMainActivity,
+                            "You Already owned subscription",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    ErrorType.ITEM_NOT_OWNED -> {
+                        editor.putBoolean("isPremium", false)
+                        editor.apply()
+                    }
                 }
-
-                Log.d("BillingConnector", "Error type: " + response.getErrorType() + " Response code: "+ response.getResponseCode() + " Message: " + response.getDebugMessage());
-
-                Toast.makeText(getApplicationContext(), "Error: "+ response.getErrorType() , Toast.LENGTH_SHORT).show();
+                Log.d(
+                    "BillingConnector",
+                    "Error type: " + response.errorType + " Response code: " + response.responseCode + " Message: " + response.debugMessage
+                )
+                Toast.makeText(
+                    applicationContext,
+                    "Error: " + response.errorType,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-        });
+        })
     }
-    private void notifyList(List<SkuInfo> skuDetails) {
-        String sku;
-        String title;
-        String price;
 
-        purchaseItemDisplay.clear();
-        for (SkuInfo skuInfo : skuDetails) {
-            sku = skuInfo.getSku();
-            title = skuInfo.getTitle();
-            price = skuInfo.getPrice();
-
-  purchaseItemDisplay.add(title + ": " + price);
-//            purchaseItemDisplay.add("Donate" + ": " + price);
-            arrayAdapter.notifyDataSetChanged();
-
+    private fun notifyList(skuDetails: List<SkuInfo>) {
+        var sku: String
+        var title: String
+        var price: String
+        purchaseItemDisplay.clear()
+        for (skuInfo in skuDetails) {
+            sku = skuInfo.sku
+            title = skuInfo.title
+            price = skuInfo.price
+            purchaseItemDisplay.add("$title: $price")
+            //            purchaseItemDisplay.add("Donate" + ": " + price);
+            arrayAdapter!!.notifyDataSetChanged()
         }
     }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
+
+
 }

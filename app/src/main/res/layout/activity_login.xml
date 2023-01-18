@@ -35,7 +35,8 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/black_overlay"
+           app:boxStrokeColor="@color/black"
+            app:boxBackgroundColor="@color/black_overlay"
             android:layout_marginTop="@dimen/_5sdp">
 
             <EditText
@@ -43,6 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Enter Email"
+                android:backgroundTint="@color/black_overlay"
                 android:inputType="textEmailAddress"
                 android:textColor="@android:color/black" />
 
@@ -64,7 +66,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_5sdp"
-            android:background="@color/black_overlay"
+            app:boxBackgroundColor="@color/black_overlay"
+            android:backgroundTint="@color/black"
+            app:boxStrokeColor="@color/black"
             app:passwordToggleEnabled="true">
 
             <EditText

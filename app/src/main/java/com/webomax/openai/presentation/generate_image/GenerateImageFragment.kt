@@ -173,44 +173,39 @@ class GenerateImageFragment : Fragment(R.layout.fragment_generate_image) {
     private fun initViewCollect() {
         with(viewModel) {
             with(binding) {
-//                rewardAdBtn.setOnClickListener {
-//                    if (loadAndShowAd() == null) {
-//                        generateButton.isEnabled = false
-//                        Toast.makeText(
-//                            this@GenerateImageFragment.requireContext(),
-//                            "Click on Watch Ad to use the app",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                        if (loadAndShowAd() != null) {
-//                            generateButton.isEnabled = true
-//                            Toast.makeText(
-//                                this@GenerateImageFragment.requireContext(),
-//                                "Now you can use the app",
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//
-//                        }
-//                    } else {
-//                        Toast.makeText(
-//                            this@GenerateImageFragment.requireContext(),
-//                            "You can use the app by once a day",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    }
-//                }
+                rewardAdBtn.setOnClickListener {
+                    if (loadAndShowAd()==null) {
+                        generateButton.isClickable = false
+                        Toast.makeText(
+                            this@GenerateImageFragment.requireContext(),
+                            "Click on Watch Ad to use the app",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
-
+                        if (loadAndShowAd() !== null) {
+                            generateButton.isClickable = true
+                            Toast.makeText(
+                                this@GenerateImageFragment.requireContext(),
+                                "Now you can use the app",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    } else{
+                        Toast.makeText(
+                            this@GenerateImageFragment.requireContext(),
+                            "You can use the app by once a day",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
 
                     generateButton.setOnClickListener {
-                        if (promptEditText.text.toString().isEmpty().not()) {
-
+                        if (promptEditText.text.toString().isEmpty().not() && loadAndShowAd() !==null)
+                         {
 
                             generateImage(promptEditText.text.toString(), 1, Sizes.SIZE_256)
-
-
                         } else {
                             promptInputLayout.error = getString(R.string.enter_prompt)
-                            generateButton.error="You can only use the app once a day"
 
 
                         }

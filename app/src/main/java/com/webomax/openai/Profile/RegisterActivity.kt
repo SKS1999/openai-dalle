@@ -73,6 +73,7 @@ class RegisterActivity : AppCompatActivity() {
         pass_register = findViewById(R.id.passwordregister)
         name_register = findViewById(R.id.Nameregister)
         txt_login = findViewById(R.id.Logintxt)
+        googlebtn = findViewById(R.id.googlebtn_register)
 
         BounceView.addAnimTo(btn_register)
         BounceView.addAnimTo(googlebtn)
