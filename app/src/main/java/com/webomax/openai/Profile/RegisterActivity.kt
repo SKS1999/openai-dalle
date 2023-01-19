@@ -185,9 +185,9 @@ class RegisterActivity : AppCompatActivity() {
     }
     @SuppressLint("ResourceType")
     private fun registrationDataCheck() {
-        val password = pass_register!!.text.toString()
-        val email = email_regster!!.text.toString()
-        val name = name_register!!.text.toString()
+        val password = pass_register.text.toString()
+        val email = email_regster.text.toString()
+        val name = name_register.text.toString()
         checkEmpty(name, email, password)
         if (android.util.Patterns.EMAIL_ADDRESS.matcher(email)
                 .matches()

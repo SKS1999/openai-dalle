@@ -30,7 +30,6 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class DashboardActivity : AppCompatActivity() {
-    lateinit var id_txt : TextView
     lateinit var name_txt : TextView
     lateinit var email_txt : TextView
     lateinit var profile : CircleImageView
@@ -60,7 +59,6 @@ class DashboardActivity : AppCompatActivity() {
         home= findViewById(R.id.home)
         recent = findViewById(R.id.recent)
         btn_profile = findViewById(R.id.Profile)
-        id_txt = findViewById(R.id.textid)
         name_txt = findViewById(R.id.textname)
         email_txt = findViewById(R.id.textemail)
         btn_logout = findViewById(R.id.logout)
@@ -148,7 +146,6 @@ class DashboardActivity : AppCompatActivity() {
 
         val user = auth.currentUser
         val userreference =DatabaseReference?.child(user!!.uid)
-        id_txt.text =user?.uid
         email_txt.text= user?.email
         name_txt.text = user?.displayName
 
