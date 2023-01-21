@@ -92,13 +92,10 @@ class DashboardActivity : AppCompatActivity() {
             startActivityForResult(intent,2)
         }
         updateprofile_btn.setOnClickListener {
-
-                updateProfile()
-
+            updateProfile()
         }
         subs_btn.setOnClickListener{
             startActivity(Intent(this@DashboardActivity, SubsMainActivity::class.java))
-
         }
 
 
