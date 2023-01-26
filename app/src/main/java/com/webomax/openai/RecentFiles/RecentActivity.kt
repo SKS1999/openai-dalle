@@ -58,15 +58,11 @@ class RecentActivity : AppCompatActivity() {
 
     //TODO(NO ITEMS ARE SHOWING INSIDE THE ACTIVITY)
     private fun getItemSize():Int{
-        val path = File(Environment.getExternalStorageDirectory().toString()+"/ImageAI")
+        val path = File(Environment.DIRECTORY_DCIM,"/ImageAI")
         if (path.exists()) {
             listItems = path.list().size
         }
         return listItems
-
-
-
-
 
     }
 

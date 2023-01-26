@@ -41,11 +41,11 @@ abstract class DownloadImage {
         val request = DownloadManager.Request(downloadUri).apply {
             setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
                 .setAllowedOverRoaming(false)
-                .setDestinationInExternalPublicDir("/ImageAI",title)
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DCIM,"/ImageAI/$title")
 
 
         }
-        val directory = File(Environment.getExternalStorageDirectory().toString() + "/ImageAI")
+        val directory = File(Environment.DIRECTORY_DCIM , "/ImageAI")
         val dir = (directory)
         if (!dir.exists()){
             dir.mkdirs()
