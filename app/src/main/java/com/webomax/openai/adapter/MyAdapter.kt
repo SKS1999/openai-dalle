@@ -30,6 +30,9 @@ class MyAdapter (var items: Int): RecyclerView.Adapter<MyAdapter.MyViewHolder>()
             holder.image.setImageBitmap(bmp)
         }else{
             Log.e("Photos","No Files Found")
+            var listItems = path.listFiles()
+            val bmp = BitmapFactory.decodeFile(listItems?.get(position)?.absolutePath)
+            holder.image.setImageBitmap(bmp)
         }
     }
 
