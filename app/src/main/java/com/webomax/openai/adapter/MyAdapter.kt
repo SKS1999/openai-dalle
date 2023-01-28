@@ -22,11 +22,11 @@ class MyAdapter (var items: Int): RecyclerView.Adapter<MyAdapter.MyViewHolder>()
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val path = File(Environment.DIRECTORY_DCIM, "/ImageAI")
+        val path = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),"/ImageAI/")
 
         if (path.exists()) {
-           var listItems = path.list()
-            val bmp = BitmapFactory.decodeFile(path.listFiles()?.get(position)?.absolutePath)
+           var listItems = path.listFiles()
+            val bmp = BitmapFactory.decodeFile(listItems?.get(position)?.absolutePath)
             holder.image.setImageBitmap(bmp)
         }else{
             Log.e("Photos","No Files Found")

@@ -5,6 +5,7 @@ import android.app.DownloadManager
 import android.content.Context
 import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import androidx.lifecycle.MutableLiveData
 import java.io.File
@@ -41,16 +42,20 @@ abstract class DownloadImage {
         val request = DownloadManager.Request(downloadUri).apply {
             setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
                 .setAllowedOverRoaming(false)
-                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DCIM,"/ImageAI/$title")
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DCIM,"/ImageAI/.jpg/")
 
 
         }
-        val directory = File(Environment.DIRECTORY_DCIM , "/ImageAI")
-        val dir = (directory)
+        var dir:File? =null
+        dir = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) ,"/ImageAI")
+        } else {
+            File(Environment.getExternalStorageDirectory(),"/ImageAI")
+        }
         if (!dir.exists()){
             dir.mkdirs()
         }
-        val file = (directory)
+        val file = (dir)
         if (file.exists()){
             file.delete()
             file.createNewFile()

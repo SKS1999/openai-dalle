@@ -21,7 +21,7 @@ class RecentActivity : AppCompatActivity() {
     private lateinit var profile:BottomNavigationItemView
     var URI_LIST_DATA = "URI_LIST_DATA"
     var IMAGE_FULL_SCREEN_CURRENT_POS = "IMAGE_FULL_SCREEN_CURRENT_POS"
-    private var listItems=0
+    private var listItems=1
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,15 +33,15 @@ class RecentActivity : AppCompatActivity() {
         initView()
         home.setOnClickListener {
             startActivity(Intent(this@RecentActivity, MainActivity::class.java))
-            finish()
+
         }
         recent.setOnClickListener {
             startActivity(Intent(this@RecentActivity, RecentActivity::class.java))
-            finish()
+
         }
         profile.setOnClickListener {
             startActivity(Intent(this@RecentActivity, DashboardActivity::class.java))
-            finish()
+
         }
 
 
@@ -58,7 +58,7 @@ class RecentActivity : AppCompatActivity() {
 
     //TODO(NO ITEMS ARE SHOWING INSIDE THE ACTIVITY)
     private fun getItemSize():Int{
-        val path = File(Environment.DIRECTORY_DCIM,"/ImageAI")
+        val path = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),"/ImageAI/")
         if (path.exists()) {
             listItems = path.list().size
         }
